@@ -56,7 +56,7 @@ export default function FinalCtaSection() {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="text-xl text-slate-400 mb-12 max-w-2xl mx-auto leading-relaxed"
         >
-          RetailIQ helps entrepreneurs launch profitable physical businesses using location intelligence, competitor analysis, and real-world business data.
+          Spotlix helps entrepreneurs launch profitable physical businesses using location intelligence, competitor analysis, and real-world business data.
         </motion.p>
 
         <motion.div
@@ -66,12 +66,12 @@ export default function FinalCtaSection() {
           transition={{ duration: 0.5, delay: 0.3 }}
           className="flex flex-col sm:flex-row items-center justify-center gap-4"
         >
-          <button className="w-full sm:w-auto px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold transition-all shadow-[0_0_20px_rgba(37,99,235,0.3)] hover:shadow-[0_0_30px_rgba(37,99,235,0.5)] flex items-center justify-center gap-2">
-            Analyze My Business <ArrowRight size={18} />
-          </button>
-          <button className="w-full sm:w-auto px-8 py-4 bg-white/5 hover:bg-white/10 text-white rounded-xl font-bold transition-all border border-white/10 flex items-center justify-center">
-            Get Location Intelligence
-          </button>
+          <a href="#contact" className="w-full sm:w-auto px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold transition-all shadow-[0_0_20px_rgba(37,99,235,0.3)] hover:shadow-[0_0_30px_rgba(37,99,235,0.5)] flex items-center justify-center gap-2">
+            Start Your Market Analysis <ArrowRight size={18} />
+          </a>
+          <a href="#contact" className="w-full sm:w-auto px-8 py-4 bg-white/5 hover:bg-white/10 text-white rounded-xl font-bold transition-all border border-white/10 flex items-center justify-center">
+            Talk With Our Strategy Team
+          </a>
         </motion.div>
       </div>
     </section>

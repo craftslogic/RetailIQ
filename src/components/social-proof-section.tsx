@@ -29,14 +29,14 @@ const STATS = [
 
 const TESTIMONIALS = [
   {
-    quote: "RetailIQ told us our target location in Gulshan was oversaturated before we signed the lease. We moved 2km away and opened to a packed house.",
+    quote: "Spotlix told us our target location in Gulshan was oversaturated before we signed the lease. We moved 2km away and opened to a packed house.",
     name: "Zara M.",
     role: "Founder, Brew & Co.",
     rating: 5,
     color: "#2563EB",
   },
   {
-    quote: "The demand forecasting was eerily accurate. We planned inventory based on RetailIQ's projections and hit 94% sell-through in month one.",
+    quote: "The demand forecasting was eerily accurate. We planned inventory based on Spotlix's projections and hit 94% sell-through in month one.",
     name: "Ahmed K.",
     role: "Owner, Metro Sneakers",
     rating: 5,

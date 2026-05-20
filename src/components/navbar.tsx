@@ -76,7 +76,7 @@ export default function Navbar() {
                 className="text-lg font-bold"
                 style={{ color: "#F8FAFC", letterSpacing: "-0.02em" }}
               >
-                Retail<span className="text-gradient-primary">IQ</span>
+                Spot<span className="text-gradient-primary">lix</span>
               </span>
             </motion.a>
 
@@ -111,7 +111,7 @@ export default function Navbar() {
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
               >
-                Book Consultation
+                Get Location Intelligence
               </motion.a>
               <motion.a
                 href="#hero"
@@ -169,7 +169,7 @@ export default function Navbar() {
             ))}
             <div className="mt-4 flex flex-col gap-2 pt-4 border-t border-white/10">
               <a href="#contact" className="btn-secondary text-center justify-center text-sm">
-                Book Consultation
+                Get Location Intelligence
               </a>
               <a href="#hero" className="btn-primary text-center justify-center text-sm">
                 <Zap size={14} /> Analyze My Business

@@ -51,7 +51,7 @@ export default function ProcessSection() {
             transition={{ duration: 0.5 }}
             className="text-4xl md:text-5xl font-bold mb-6 text-slate-50 tracking-tight"
           >
-            How <span className="text-gradient-primary">RetailIQ</span> Works
+            How <span className="text-gradient-primary">Spotlix</span> Works
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}

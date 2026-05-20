@@ -1,16 +1,44 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
-import { Mail, Phone, MapPin, Send, Zap, CheckCircle } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Mail, Phone, MapPin, Send, CheckCircle, Loader2, AlertCircle } from "lucide-react";
+import { sendEmail } from "@/lib/emailjs";
 
 export default function ContactSection() {
-  const [sent, setSent] = useState(false);
-  const [form, setForm] = useState({ name: "", email: "", business: "", message: "" });
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    business: "",
+    area: "",
+    budget: "",
+    goals: ""
+  });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSent(true);
+    setStatus("loading");
+    setErrorMessage("");
+
+    try {
+      await sendEmail({
+        to_name: "Spotlix Team",
+        from_name: form.name,
+        from_email: form.email,
+        business_type: form.business,
+        preferred_area: form.area,
+        budget: form.budget,
+        business_goals: form.goals,
+      });
+      setStatus("success");
+      setForm({ name: "", email: "", business: "", area: "", budget: "", goals: "" });
+    } catch (error) {
+      console.error(error);
+      setStatus("error");
+      setErrorMessage("Failed to send message. Please try again or email us directly.");
+    }
   };
 
   return (
@@ -36,7 +64,7 @@ export default function ContactSection() {
             {/* Contact details */}
             <div className="space-y-4 mb-10">
               {[
-                { icon: Mail, label: "Email Us", value: "hello@retailiq.co", color: "#2563EB" },
+                { icon: Mail, label: "Email Us", value: "hello@spotlix.io", color: "#2563EB" },
                 { icon: Phone, label: "Call Us", value: "+92 300 0000000", color: "#10B981" },
                 { icon: MapPin, label: "Based In", value: "Karachi, Pakistan", color: "#06B6D4" },
               ].map(({ icon: Icon, label, value, color }, i) => (
@@ -70,72 +98,126 @@ export default function ContactSection() {
 
           {/* Right — Form */}
           <motion.div initial={{ opacity: 0, x: 40 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }}>
-            <div className="rounded-2xl p-8" style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.08)" }}>
-              {sent ? (
-                <div className="flex flex-col items-center justify-center py-12 text-center">
-                  <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ type: "spring", duration: 0.6 }}
-                    className="w-16 h-16 rounded-2xl flex items-center justify-center mb-4" style={{ background: "rgba(16,185,129,0.15)", border: "1px solid rgba(16,185,129,0.3)" }}>
-                    <CheckCircle size={32} color="#10B981" />
+            <div className="relative rounded-3xl p-8 overflow-hidden" style={{ background: "rgba(15, 23, 42, 0.6)", border: "1px solid rgba(56, 189, 248, 0.2)", boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.5)" }}>
+              {/* Subtle background glow */}
+              <div className="absolute top-0 right-0 -mr-16 -mt-16 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
+
+              <AnimatePresence mode="wait">
+                {status === "success" ? (
+                  <motion.div 
+                    key="success"
+                    initial={{ opacity: 0, scale: 0.9 }} 
+                    animate={{ opacity: 1, scale: 1 }} 
+                    exit={{ opacity: 0, scale: 0.9 }}
+                    className="flex flex-col items-center justify-center py-16 text-center h-full"
+                  >
+                    <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ type: "spring", duration: 0.6, delay: 0.1 }}
+                      className="w-20 h-20 rounded-full flex items-center justify-center mb-6" style={{ background: "rgba(16,185,129,0.15)", border: "1px solid rgba(16,185,129,0.3)" }}>
+                      <CheckCircle size={40} color="#10B981" />
+                    </motion.div>
+                    <h3 className="text-2xl font-bold mb-3 text-white">Intelligence Request Sent</h3>
+                    <p className="text-slate-400 mb-8 max-w-[280px]">Our retail intelligence team will review your details and reach out shortly.</p>
+                    <button 
+                      onClick={() => setStatus("idle")}
+                      className="text-sm font-medium text-blue-400 hover:text-blue-300 transition-colors"
+                    >
+                      Submit another request
+                    </button>
                   </motion.div>
-                  <h3 className="text-xl font-bold mb-2" style={{ color: "#F8FAFC" }}>Message Sent!</h3>
-                  <p className="text-sm" style={{ color: "#94A3B8" }}>Our team will reach out within 24 hours.</p>
-                </div>
-              ) : (
-                <form onSubmit={handleSubmit} className="space-y-4" action="https://formspree.io/f/your_formspree_id" method="POST">
-                  <h3 className="text-lg font-bold mb-6" style={{ color: "#F8FAFC" }}>Book a Free Strategy Call</h3>
+                ) : (
+                  <motion.form 
+                    key="form"
+                    initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+                    onSubmit={handleSubmit} 
+                    className="space-y-5 relative z-10"
+                  >
+                    <div className="mb-6">
+                      <h3 className="text-xl font-bold text-white mb-2">Initialize Analysis</h3>
+                      <p className="text-sm text-slate-400">Fill in the parameters below to begin.</p>
+                    </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    {[
-                      { key: "name", label: "Full Name", placeholder: "Aliyan Khan", type: "text" },
-                      { key: "email", label: "Email Address", placeholder: "you@company.com", type: "email" },
-                      { key: "business", label: "Business Type", placeholder: "e.g. Café, Clothing Store", type: "text" },
-                      { key: "area", label: "Preferred Area", placeholder: "e.g. Downtown, Suburbs", type: "text" },
-                      { key: "budget", label: "Budget", placeholder: "e.g. $50k - $100k", type: "text" },
-                    ].map(({ key, label, placeholder, type }) => (
-                      <div key={key} className={key === 'business' || key === 'area' || key === 'budget' ? 'col-span-1' : 'col-span-1 sm:col-span-2'}>
-                        <label className="block text-xs font-semibold mb-1.5" style={{ color: "#94A3B8" }}>{label}</label>
-                        <input
-                          type={type}
-                          name={key}
-                          placeholder={placeholder}
-                          value={form[key as keyof typeof form]}
-                          onChange={(e) => setForm({ ...form, [key]: e.target.value })}
-                          required={key === 'name' || key === 'email'}
-                          className="w-full px-4 py-3 rounded-xl text-sm outline-none transition-all duration-200"
-                          style={{
-                            background: "rgba(255,255,255,0.05)",
-                            border: "1px solid rgba(255,255,255,0.09)",
-                            color: "#F8FAFC",
-                          }}
-                          onFocus={(e) => (e.target.style.borderColor = "rgba(37,99,235,0.6)")}
-                          onBlur={(e) => (e.target.style.borderColor = "rgba(255,255,255,0.09)")}
-                        />
+                    {status === "error" && (
+                      <div className="flex items-center gap-2 p-3 rounded-lg bg-red-500/10 border border-red-500/20 text-red-400 text-sm mb-4">
+                        <AlertCircle size={16} />
+                        <span>{errorMessage}</span>
                       </div>
-                    ))}
-                  </div>
+                    )}
 
-                  <div>
-                    <label className="block text-xs font-semibold mb-1.5" style={{ color: "#94A3B8" }}>Business Goals</label>
-                    <textarea
-                      name="goals"
-                      rows={3}
-                      placeholder="What are you trying to achieve? Tell us about your timeline and expectations..."
-                      value={form.message}
-                      onChange={(e) => setForm({ ...form, message: e.target.value })}
-                      className="w-full px-4 py-3 rounded-xl text-sm outline-none resize-none transition-all duration-200"
-                      style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.09)", color: "#F8FAFC" }}
-                      onFocus={(e) => (e.target.style.borderColor = "rgba(37,99,235,0.6)")}
-                      onBlur={(e) => (e.target.style.borderColor = "rgba(255,255,255,0.09)")}
-                    />
-                  </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                      {[
+                        { key: "name", label: "Full Name", placeholder: "Aliyan Khan", type: "text" },
+                        { key: "email", label: "Email Address", placeholder: "you@company.com", type: "email" },
+                        { key: "business", label: "Business Type", placeholder: "e.g. Café, Clothing Store", type: "text" },
+                        { key: "area", label: "Preferred City/Area", placeholder: "e.g. Gulshan, Karachi", type: "text" },
+                        { key: "budget", label: "Budget", placeholder: "e.g. $50k - $100k", type: "text" },
+                      ].map(({ key, label, placeholder, type }) => (
+                        <div key={key} className={key === 'business' || key === 'area' || key === 'budget' ? 'col-span-1' : 'col-span-1 sm:col-span-2'}>
+                          <label className="block text-xs font-semibold mb-2 text-slate-400 tracking-wide uppercase">{label}</label>
+                          <input
+                            type={type}
+                            name={key}
+                            placeholder={placeholder}
+                            value={form[key as keyof typeof form]}
+                            onChange={(e) => setForm({ ...form, [key]: e.target.value })}
+                            required={key === 'name' || key === 'email'}
+                            disabled={status === "loading"}
+                            className="w-full px-4 py-3 rounded-xl text-sm outline-none transition-all duration-300 disabled:opacity-50"
+                            style={{
+                              background: "rgba(255,255,255,0.03)",
+                              border: "1px solid rgba(255,255,255,0.1)",
+                              color: "#F8FAFC",
+                            }}
+                            onFocus={(e) => { e.target.style.borderColor = "rgba(56, 189, 248, 0.5)"; e.target.style.background = "rgba(255,255,255,0.05)"; }}
+                            onBlur={(e) => { e.target.style.borderColor = "rgba(255,255,255,0.1)"; e.target.style.background = "rgba(255,255,255,0.03)"; }}
+                          />
+                        </div>
+                      ))}
+                    </div>
 
-                  <button type="submit" className="btn-primary w-full justify-center py-3 mt-2">
-                    <Send size={16} />
-                    Analyze My Business
-                  </button>
-                  <p className="text-xs text-center mt-3" style={{ color: "#475569" }}>We respond within 24 hours · No spam, ever.</p>
-                </form>
-              )}
+                    <div>
+                      <label className="block text-xs font-semibold mb-2 text-slate-400 tracking-wide uppercase">Business Goals</label>
+                      <textarea
+                        name="goals"
+                        rows={3}
+                        placeholder="What are you trying to achieve? Tell us about your timeline and expectations..."
+                        value={form.goals}
+                        onChange={(e) => setForm({ ...form, goals: e.target.value })}
+                        disabled={status === "loading"}
+                        className="w-full px-4 py-3 rounded-xl text-sm outline-none resize-none transition-all duration-300 disabled:opacity-50"
+                        style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.1)", color: "#F8FAFC" }}
+                        onFocus={(e) => { e.target.style.borderColor = "rgba(56, 189, 248, 0.5)"; e.target.style.background = "rgba(255,255,255,0.05)"; }}
+                        onBlur={(e) => { e.target.style.borderColor = "rgba(255,255,255,0.1)"; e.target.style.background = "rgba(255,255,255,0.03)"; }}
+                      />
+                    </div>
+
+                    <button 
+                      type="submit" 
+                      disabled={status === "loading"}
+                      className="w-full py-4 mt-4 rounded-xl font-bold text-sm text-white flex items-center justify-center gap-2 transition-all duration-300 hover:scale-[1.02] active:scale-95 disabled:opacity-70 disabled:hover:scale-100 relative overflow-hidden group"
+                      style={{
+                        background: "linear-gradient(135deg, #2563EB, #06B6D4)",
+                        boxShadow: "0 10px 20px -10px rgba(37,99,235,0.5)",
+                      }}
+                    >
+                      {/* Button shine effect */}
+                      <div className="absolute inset-0 -translate-x-full group-hover:animate-[shimmer_1.5s_infinite] bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12" />
+                      
+                      {status === "loading" ? (
+                        <>
+                          <Loader2 size={18} className="animate-spin" />
+                          Processing...
+                        </>
+                      ) : (
+                        <>
+                          <Send size={16} />
+                          Analyze My Business
+                        </>
+                      )}
+                    </button>
+                    <p className="text-xs text-center mt-4 text-slate-500">Secure AES-256 transmission. Your data is protected.</p>
+                  </motion.form>
+                )}
+              </AnimatePresence>
             </div>
           </motion.div>
         </div>

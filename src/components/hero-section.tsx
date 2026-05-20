@@ -226,19 +226,19 @@ export default function HeroSection() {
               className="text-4xl sm:text-5xl lg:text-[56px] font-bold leading-tight mb-6"
               style={{ color: "#F8FAFC", letterSpacing: "-0.025em", lineHeight: "1.08" }}
             >
-              Launch Your Physical <span className="text-gradient-primary">Business</span> With Data-Driven <span className="text-gradient-primary">Intelligence.</span>
+              Launch Your Business in the <span className="text-gradient-primary">Right Location.</span>
             </motion.h1>
 
             <motion.p
               initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }}
               className="text-lg leading-relaxed mb-8" style={{ color: "#94A3B8", maxWidth: 480 }}
             >
-              Analyze locations, study competitors, forecast demand, and build profitable physical businesses using modern retail intelligence systems.
+              Spotlix helps businesses analyze markets, evaluate locations, study competitors, and identify high-potential opportunities before launching physical businesses.
             </motion.p>
 
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.3 }} className="flex flex-wrap gap-3 mb-12">
-              <a href="#features" className="btn-primary"><Zap size={15} />Analyze My Business</a>
-              <a href="#intelligence" className="btn-secondary">Explore Platform <ArrowRight size={15} /></a>
+              <a href="#contact" className="btn-primary"><Zap size={15} />Start Your Analysis</a>
+              <a href="#intelligence" className="btn-secondary">Explore Solutions <ArrowRight size={15} /></a>
             </motion.div>
 
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.4 }} className="grid grid-cols-3 gap-3 mb-6">

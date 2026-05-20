@@ -37,7 +37,7 @@ export default function Footer() {
                 <BarChart3 size={16} color="white" strokeWidth={2.5} />
               </div>
               <span className="text-lg font-bold" style={{ color: "#F8FAFC", letterSpacing: "-0.02em" }}>
-                Retail<span className="text-gradient-primary">IQ</span>
+                Spot<span className="text-gradient-primary">lix</span>
               </span>
             </div>
             <p className="text-sm leading-relaxed mb-6 max-w-xs" style={{ color: "#64748B" }}>
@@ -62,39 +62,50 @@ export default function Footer() {
           </div>
 
           {/* Links */}
-          {Object.entries(LINKS).map(([category, items]) => (
-            <div key={category}>
-              <p className="text-xs font-bold mb-4" style={{ color: "#F8FAFC", letterSpacing: "0.07em" }}>{category.toUpperCase()}</p>
-              <ul className="space-y-2.5">
-                {items.map((item) => (
-                  <li key={item}>
-                    <a href="#" className="text-sm transition-colors duration-200" style={{ color: "#64748B" }}
-                      onMouseEnter={(e) => ((e.target as HTMLElement).style.color = "#94A3B8")}
-                      onMouseLeave={(e) => ((e.target as HTMLElement).style.color = "#64748B")}
-                    >
-                      {item}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+          <div>
+            <p className="text-xs font-bold mb-4" style={{ color: "#F8FAFC", letterSpacing: "0.07em" }}>PRODUCT</p>
+            <ul className="space-y-2.5">
+              {["Location Scoring", "Competitor Mapping", "Demand Forecasting", "Risk Intelligence", "Launch Planning"].map((item) => (
+                <li key={item}>
+                  <a href="/#features" className="text-sm transition-colors duration-200" style={{ color: "#64748B" }}>{item}</a>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <p className="text-xs font-bold mb-4" style={{ color: "#F8FAFC", letterSpacing: "0.07em" }}>COMPANY</p>
+            <ul className="space-y-2.5">
+              <li><a href="/about-us" className="text-sm transition-colors duration-200" style={{ color: "#64748B" }}>About Us</a></li>
+              <li><a href="#" className="text-sm transition-colors duration-200" style={{ color: "#64748B" }}>Careers</a></li>
+              <li><a href="#" className="text-sm transition-colors duration-200" style={{ color: "#64748B" }}>Press</a></li>
+              <li><a href="#" className="text-sm transition-colors duration-200" style={{ color: "#64748B" }}>Blog</a></li>
+              <li><a href="/#contact" className="text-sm transition-colors duration-200" style={{ color: "#64748B" }}>Contact</a></li>
+            </ul>
+          </div>
+          <div>
+            <p className="text-xs font-bold mb-4" style={{ color: "#F8FAFC", letterSpacing: "0.07em" }}>RESOURCES</p>
+            <ul className="space-y-2.5">
+              <li><a href="#" className="text-sm transition-colors duration-200" style={{ color: "#64748B" }}>Documentation</a></li>
+              <li><a href="#" className="text-sm transition-colors duration-200" style={{ color: "#64748B" }}>Case Studies</a></li>
+              <li><a href="/#pricing" className="text-sm transition-colors duration-200" style={{ color: "#64748B" }}>Pricing</a></li>
+              <li><a href="/security" className="text-sm transition-colors duration-200" style={{ color: "#64748B" }}>Security</a></li>
+              <li><a href="/#contact" className="text-sm transition-colors duration-200" style={{ color: "#64748B" }}>Support</a></li>
+            </ul>
+          </div>
         </div>
 
         {/* Bottom bar */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4" style={{ borderTop: "1px solid rgba(255,255,255,0.07)" }}>
           <p className="text-xs" style={{ color: "#475569" }}>
-            © 2026 RetailIQ. All rights reserved. Built in Karachi 🇵🇰
+            © 2026 Spotlix. All rights reserved. Built in Karachi 🇵🇰
           </p>
-          <div className="flex items-center gap-6">
-            {["Privacy Policy", "Terms of Service", "Cookie Policy"].map((link) => (
-              <a key={link} href="#" className="text-xs transition-colors duration-200" style={{ color: "#475569" }}
-                onMouseEnter={(e) => ((e.target as HTMLElement).style.color = "#94A3B8")}
-                onMouseLeave={(e) => ((e.target as HTMLElement).style.color = "#475569")}
-              >
-                {link}
-              </a>
-            ))}
+          <div className="flex items-center gap-4 flex-wrap justify-center">
+            <a href="/privacy" className="text-xs transition-colors duration-200 text-slate-500 hover:text-slate-400">Privacy Policy</a>
+            <a href="/terms" className="text-xs transition-colors duration-200 text-slate-500 hover:text-slate-400">Terms of Service</a>
+            <a href="/refund-policy" className="text-xs transition-colors duration-200 text-slate-500 hover:text-slate-400">Refund Policy</a>
+            <a href="/cookie-policy" className="text-xs transition-colors duration-200 text-slate-500 hover:text-slate-400">Cookie Policy</a>
+            <a href="/disclaimer" className="text-xs transition-colors duration-200 text-slate-500 hover:text-slate-400">Disclaimer</a>
+            <a href="/acceptable-use" className="text-xs transition-colors duration-200 text-slate-500 hover:text-slate-400">Acceptable Use</a>
           </div>
         </div>
       </div>

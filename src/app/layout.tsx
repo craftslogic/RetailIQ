@@ -9,16 +9,36 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "RetailIQ — Physical Business Intelligence & Launch Platform",
+  title: "Spotlix — Physical Business Intelligence Platform",
   description:
-    "Analyze locations, study competitors, forecast demand, and build profitable physical businesses using modern retail intelligence systems. Launch smarter with RetailIQ.",
+    "Spotlix helps businesses analyze markets, evaluate locations, study competitors, and identify profitable opportunities before launching physical businesses.",
   keywords:
-    "retail intelligence, location analysis, competitor mapping, demand forecasting, physical business analytics, retail analytics platform",
+    "spotlix, retail intelligence, location analysis, competitor mapping, physical business intelligence, market validation, branding, business optimization",
   openGraph: {
-    title: "RetailIQ — Physical Business Intelligence",
+    title: "Spotlix — Smarter Locations. Stronger Businesses.",
     description:
-      "Launch your physical business with data-driven intelligence. Analyze locations, map competitors, and forecast demand.",
+      "Spotlix helps businesses analyze markets, evaluate locations, study competitors, and identify profitable opportunities before launching physical businesses.",
+    url: "https://spotlix.io",
+    siteName: "Spotlix",
+    images: [
+      {
+        url: "/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Spotlix — Physical Business Intelligence Platform",
+      },
+    ],
+    locale: "en_US",
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Spotlix — Smarter Locations. Stronger Businesses.",
+    description: "Spotlix helps businesses analyze markets, evaluate locations, study competitors, and identify profitable opportunities before launching physical businesses.",
+    images: ["/og-image.jpg"],
+  },
+  icons: {
+    icon: "/favicon.ico",
   },
 };
 

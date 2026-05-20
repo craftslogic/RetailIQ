@@ -105,7 +105,7 @@ export default function BusinessFailureSection() {
             className="text-lg max-w-2xl mx-auto"
             style={{ color: "#94A3B8" }}
           >
-            80% of physical businesses close within their first 5 years. RetailIQ
+            80% of physical businesses close within their first 5 years. Spotlix
             maps every risk factor before you invest a single rupee.
           </motion.p>
         </div>
@@ -194,7 +194,7 @@ export default function BusinessFailureSection() {
             }}
           >
             <span className="text-sm" style={{ color: "#94A3B8" }}>
-              RetailIQ identifies all 6 risk factors before you sign a lease.
+              Spotlix identifies all 6 risk factors before you sign a lease.
             </span>
             <a href="#features" className="btn-primary text-sm py-2 px-4">
               Run Risk Analysis

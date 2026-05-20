@@ -63,7 +63,7 @@ export default function DashboardPreviewSection() {
               <div className="h-4 w-px bg-white/10 mx-2" />
               <div className="flex items-center gap-2 text-slate-400 text-sm font-medium">
                 <LayoutDashboard size={16} />
-                <span>RetailIQ Intelligence</span>
+                <span>Spotlix Intelligence</span>
               </div>
             </div>
             <div className="flex items-center gap-4">

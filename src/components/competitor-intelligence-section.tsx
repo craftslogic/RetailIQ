@@ -163,7 +163,7 @@ export default function CompetitorIntelligenceSection() {
           <div className="flex-1">
             <p className="text-sm font-semibold mb-0.5" style={{ color: "#FCD34D" }}>Market Saturation Alert</p>
             <p className="text-sm" style={{ color: "#94A3B8" }}>
-              This area already contains <strong style={{ color: "#F59E0B" }}>12 clothing stores</strong> targeting the same 18–35 audience — a RetailIQ flag that saved one client ₨4.2M in misallocated capital.
+              This area already contains <strong style={{ color: "#F59E0B" }}>12 clothing stores</strong> targeting the same 18–35 audience — a Spotlix flag that saved one client ₨4.2M in misallocated capital.
             </p>
           </div>
           <div className="flex-shrink-0">

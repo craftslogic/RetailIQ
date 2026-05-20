@@ -1,0 +1,189 @@
+# SPOTLIX — WEBSITE POLICIES & LEGAL STRUCTURE
+
+## PRIVACY POLICY
+
+Effective Date: January 1, 2026
+
+At Spotlix, protecting user privacy and maintaining trust is one of our highest priorities. This Privacy Policy explains how Spotlix collects, stores, processes, and protects information when users access our platform, services, systems, and digital infrastructure.
+
+Spotlix operates as a location intelligence and business feasibility platform designed to help entrepreneurs and physical businesses analyze markets, evaluate locations, study competitors, and improve launch decisions.
+
+To provide these services effectively, Spotlix may collect personal, business, operational, and technical information including names, email addresses, business concepts, target locations, market preferences, billing information, communication records, and technical analytics data.
+
+Technical information may include browser type, IP address, operating system, device information, interaction behavior, and session analytics used to improve platform functionality and operational performance.
+
+Spotlix may utilize third-party infrastructure providers including payment processors, analytics systems, cloud hosting providers, communication systems, scheduling systems, and operational software tools.
+
+Cookies and tracking technologies may be used to improve user experience, analyze platform traffic, monitor operational performance, enhance security systems, and optimize platform functionality.
+
+Spotlix implements commercially reasonable security measures including encrypted connections, restricted access systems, authentication protections, cloud infrastructure security, and operational monitoring systems.
+
+Users may request access, correction, or deletion of their information where applicable under operational and legal limitations.
+
+Spotlix does not sell personal information to third parties. Information may only be shared where necessary for operational services, legal compliance, fraud prevention, infrastructure functionality, or business protection.
+
+By using Spotlix, users acknowledge and agree to this Privacy Policy.
+
+---
+
+## TERMS OF SERVICE
+
+Effective Date: January 1, 2026
+
+These Terms of Service govern access to and use of the Spotlix platform, website, systems, reports, strategic recommendations, business intelligence services, and operational infrastructure.
+
+By accessing Spotlix, users agree to comply with these terms, conditions, and applicable laws.
+
+Spotlix provides market intelligence, location analysis, competitor research, business feasibility evaluation, strategic recommendations, and launch planning support for physical businesses.
+
+Users agree not to misuse the platform, interfere with operational systems, attempt unauthorized access, distribute harmful content, exploit vulnerabilities, or engage in unlawful activities.
+
+Certain Spotlix services may require subscription fees, retainers, consultations, or project-based billing agreements. Users agree to complete payments according to agreed billing terms.
+
+All platform materials including reports, analytics systems, branding assets, frameworks, strategic recommendations, graphics, dashboards, methodologies, and intellectual property remain property of Spotlix unless otherwise agreed in writing.
+
+Spotlix provides strategic guidance and analytical insights but does not guarantee profitability, business success, revenue growth, investment outcomes, or operational performance.
+
+Users remain solely responsible for all business decisions, investments, operational actions, expansion strategies, and implementation activities resulting from Spotlix services or recommendations.
+
+Spotlix reserves the right to modify, suspend, reject, or discontinue services where necessary for operational, legal, security, or business reasons.
+
+Continued use of the platform constitutes acceptance of these Terms of Service.
+
+---
+
+## REFUND POLICY
+
+Due to the customized and analytical nature of Spotlix services, completed reports, consultations, analyses, strategic recommendations, and delivered operational assets are generally non-refundable.
+
+Refund requests may be reviewed under limited circumstances including duplicate payments, billing errors, or failure to initiate agreed services.
+
+Completed feasibility reports, market research analyses, location evaluations, strategic consultations, competitor studies, and business recommendations are generally non-refundable once delivered or substantially completed.
+
+Users subscribed to recurring plans may cancel future billing cycles before the next scheduled renewal date.
+
+Unauthorized chargebacks may result in service suspension or account termination.
+
+Spotlix reserves the right to determine refund eligibility based on operational progress, allocated resources, and delivered services.
+
+---
+
+## DISCLAIMER
+
+Spotlix provides strategic market intelligence, location analysis, competitor research, and business feasibility recommendations intended for informational and operational purposes only.
+
+Spotlix does not guarantee:
+- business profitability
+- successful expansion
+- revenue growth
+- customer acquisition
+- market dominance
+- operational success
+- investment outcomes
+
+Business performance depends on multiple external factors including execution quality, local competition, economic conditions, market behavior, operational management, and customer demand.
+
+Users acknowledge that all business activities involve inherent risks and that strategic recommendations do not guarantee future results.
+
+---
+
+## COOKIE POLICY
+
+Spotlix uses cookies and analytics technologies to improve user experience, optimize platform functionality, monitor traffic patterns, improve operational systems, and enhance security protections.
+
+Cookies may collect information related to browser activity, device information, session analytics, and interaction behavior.
+
+Users may disable cookies through browser settings; however, certain platform features may become limited.
+
+By continuing to use Spotlix, users consent to the use of cookies and related tracking technologies.
+
+---
+
+## DATA SECURITY POLICY
+
+Spotlix prioritizes infrastructure security and operational protection through modern security systems and cloud-based safeguards.
+
+Security measures may include encrypted HTTPS connections, authentication systems, restricted internal access, firewall protections, monitoring systems, and secure cloud architecture.
+
+Although Spotlix implements commercially reasonable security practices, no digital platform can guarantee complete protection against all cyber threats or unauthorized activity.
+
+Users are encouraged to maintain secure passwords and responsible account security practices.
+
+---
+
+## ACCEPTABLE USE POLICY
+
+Users may not:
+- misuse platform systems
+- distribute malicious software
+- conduct fraudulent activity
+- exploit vulnerabilities
+- impersonate others
+- violate laws or regulations
+- abuse infrastructure services
+
+Spotlix reserves the right to suspend or terminate accounts that violate operational, legal, or security standards.
+
+---
+
+## CONTACT INFORMATION
+
+Business Name:
+Spotlix
+
+Website:
+https://spotlix.io
+
+Business Email:
+hello@spotlix.io
+
+Support Email:
+support@spotlix.io
+
+Privacy Contact:
+privacy@spotlix.io
+
+---
+
+## RECOMMENDED WEBSITE PAGES
+
+Main Pages:
+- Home
+- About
+- Solutions
+- Pricing
+- Contact
+- Dashboard
+- Login/Register
+
+Legal Pages:
+- Privacy Policy
+- Terms of Service
+- Refund Policy
+- Cookie Policy
+- Disclaimer
+
+Premium Pages:
+- Security
+- FAQ
+- Insights/Blog
+- Case Studies
+- Book a Consultation
+
+---
+
+## FOOTER STRUCTURE
+
+Footer Links:
+- Privacy Policy
+- Terms
+- Refund Policy
+- Cookie Policy
+- Disclaimer
+- Security
+- About
+- Contact
+- Pricing
+
+Footer Example:
+©️ 2026 Spotlix. All rights reserved.

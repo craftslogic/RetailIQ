@@ -12,7 +12,7 @@ const stories = [
       { label: "Revenue Growth", value: "+140%", icon: TrendingUp, color: "#10B981" },
       { label: "Foot Traffic", value: "+85%", icon: Users, color: "#3B82F6" },
     ],
-    desc: "RetailIQ identified an under-served tech demographic just two blocks from their original location choice. Lumina launched exactly where demand was peaking.",
+    desc: "Spotlix identified an under-served tech demographic just two blocks from their original location choice. Lumina launched exactly where demand was peaking.",
   },
   {
     type: "Fitness Studio",
