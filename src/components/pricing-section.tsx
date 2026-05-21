@@ -1,279 +1,286 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
-import { CheckCircle2, Zap, Map, Target, ChevronDown, Activity, Globe } from "lucide-react";
-import { useState } from "react";
+import { useRef, useState } from "react";
+import { motion, useInView } from "framer-motion";
+import { Check, Star, ArrowRight, Zap } from "lucide-react";
 
-const mainPlans = [
+const plans = [
+  {
+    name: "Area Scan",
+    price: "Free",
+    priceSub: "No credit card required",
+    description: "Get a quick surface-level overview of a target location or market area.",
+    badge: null,
+    recommended: false,
+    color: "#64748B",
+    features: [
+      "Basic location overview",
+      "Public market data snapshot",
+      "Competitor count estimate",
+      "General area demographics",
+      "Summary PDF report",
+    ],
+    cta: "Start Free Scan",
+  },
   {
     name: "Location Research",
     price: "$199",
-    priceSuffix: " – $499",
-    desc: "Best for small retail & local businesses",
+    priceSub: "Up to $499 based on scope",
+    description: "Deep-dive location analysis with real market data and competitor insights.",
+    badge: "Popular",
+    recommended: true,
+    color: "#2563EB",
     features: [
-      "Detailed location analysis",
-      "Nearby competitor research",
-      "Customer demographic analysis",
-      "Foot traffic estimation",
-      "Area demand validation",
-      "Risk & opportunity report"
+      "Full location intelligence report",
+      "Foot traffic & demand analysis",
+      "Competitor mapping (5km radius)",
+      "Market saturation score",
+      "Commercial zone evaluation",
+      "Actionable insights summary",
     ],
-    highlight: false,
-    button: "Get Location Intelligence",
-    icon: Map,
-    color: "#06B6D4"
+    cta: "Get Location Research",
   },
   {
     name: "Retail Strategy",
     price: "$799",
-    priceSuffix: " – $2,000",
-    desc: "Best for clothing brands, cafes, salons, stores",
+    priceSub: "Up to $2,000 based on scope",
+    description: "Comprehensive retail feasibility study with strategic positioning framework.",
+    badge: "Recommended",
+    recommended: true,
+    color: "#06B6D4",
     features: [
-      "Complete business feasibility report",
-      "Pricing strategy suggestions",
-      "Product positioning analysis",
-      "Competitor intelligence",
-      "Branding recommendations",
-      "Revenue estimation",
-      "Success probability scoring"
+      "Everything in Location Research",
+      "Full feasibility evaluation",
+      "Competitor gap analysis",
+      "Target customer profiling",
+      "Retail strategy playbook",
+      "Market entry recommendations",
+      "Revenue projection model",
     ],
-    highlight: true,
-    button: "Build My Retail Strategy",
-    icon: Target,
-    color: "#2563EB"
+    cta: "Build My Strategy",
   },
   {
     name: "Launch & Branding",
     price: "$2,500",
-    priceSuffix: " – $6,000",
-    desc: "Best for physical business launches",
+    priceSub: "Up to $6,000 based on scope",
+    description: "End-to-end launch intelligence including brand positioning and go-to-market strategy.",
+    badge: "Best Value",
+    recommended: true,
+    color: "#8B5CF6",
     features: [
-      "Full branding system",
-      "Store identity design",
-      "Social media branding",
-      "Website development",
-      "Launch strategy",
-      "Target market strategy",
-      "Customer acquisition strategy",
-      "Digital presence setup"
+      "Everything in Retail Strategy",
+      "Brand positioning framework",
+      "Visual identity direction",
+      "Launch strategy roadmap",
+      "Digital presence planning",
+      "6-month growth blueprint",
+      "1-on-1 strategy consultation",
     ],
-    highlight: false,
-    button: "Start Launch Planning",
-    icon: Activity,
-    color: "#10B981"
-  }
-];
-
-const secondaryPlans = [
-  {
-    name: "Area Scan",
-    price: "Free",
-    desc: "Best for first-time business owners",
-    features: [
-      "Basic location overview",
-      "Simple competition check",
-      "Basic demand insights",
-      "Introductory recommendations",
-      "Area potential summary"
-    ]
+    cta: "Plan My Launch",
   },
   {
     name: "Business Optimization",
-    price: "$5,000+",
-    desc: "Best for existing struggling businesses",
+    price: "$5,000",
+    priceSub: "Up to $15,000+ based on scope",
+    description: "Full-scale business intelligence system for scaling businesses and multi-location brands.",
+    badge: null,
+    recommended: false,
+    color: "#10B981",
     features: [
-      "Business restructuring",
-      "Location optimization",
-      "Rebranding",
-      "Product repositioning",
-      "Store improvement strategy",
-      "Customer experience optimization",
-      "Sales enhancement strategy",
-      "Business optimization strategy"
-    ]
+      "Everything in Launch & Branding",
+      "Multi-location analysis",
+      "Performance optimization audit",
+      "Advanced market intelligence",
+      "Quarterly strategy reviews",
+      "Priority support access",
+      "Dedicated analyst team",
+    ],
+    cta: "Scale My Business",
   },
   {
     name: "Retail Expansion",
     price: "Custom",
-    desc: "Best for multi-location & scaling businesses",
+    priceSub: "Enterprise pricing available",
+    description: "Custom enterprise intelligence programs for franchises, investors, and expansion networks.",
+    badge: "Enterprise",
+    recommended: false,
+    color: "#F59E0B",
     features: [
-      "Expansion intelligence",
-      "Multi-location analysis",
-      "Advanced competitor mapping",
-      "Franchise planning",
-      "Business growth systems",
-      "Long-term optimization support",
-      "Dedicated intelligence team"
-    ]
-  }
+      "Custom research programs",
+      "Portfolio location analysis",
+      "Franchise expansion maps",
+      "Investor intelligence reports",
+      "Custom API integrations",
+      "Dedicated success manager",
+      "SLA-backed delivery",
+    ],
+    cta: "Contact Us",
+  },
 ];
 
+function PricingCard({ plan, index, inView }: { plan: typeof plans[0]; index: number; inView: boolean }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
+      className={`relative glass-card rounded-2xl p-6 flex flex-col group glass-card-hover overflow-hidden ${
+        plan.recommended ? "glow-border-primary" : ""
+      }`}
+      style={plan.recommended ? { border: `1px solid ${plan.color}40` } : {}}
+    >
+      {/* Glow bg */}
+      <div
+        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl"
+        style={{ background: `radial-gradient(circle at 50% 0%, ${plan.color}10, transparent 70%)` }}
+      />
+      {plan.recommended && (
+        <div
+          className="absolute inset-0 opacity-30 rounded-2xl"
+          style={{ background: `radial-gradient(circle at 50% 0%, ${plan.color}12, transparent 70%)` }}
+        />
+      )}
+
+      {/* Badge */}
+      {plan.badge && (
+        <div
+          className="absolute top-4 right-4 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider flex items-center gap-1"
+          style={{ background: `${plan.color}25`, color: plan.color, border: `1px solid ${plan.color}40` }}
+        >
+          {plan.recommended && <Star className="w-2.5 h-2.5" />}
+          {plan.badge}
+        </div>
+      )}
+
+      <div className="relative z-10 flex flex-col h-full">
+        {/* Plan name */}
+        <div className="mb-4">
+          <div
+            className="w-10 h-10 rounded-xl flex items-center justify-center mb-3"
+            style={{ background: `${plan.color}18`, border: `1px solid ${plan.color}25` }}
+          >
+            <Zap className="w-4.5 h-4.5" style={{ color: plan.color }} />
+          </div>
+          <h3 className="text-base font-bold text-white">{plan.name}</h3>
+        </div>
+
+        {/* Price */}
+        <div className="mb-4">
+          <div className="flex items-baseline gap-1">
+            <span className="text-3xl font-black text-white">{plan.price}</span>
+            {plan.price !== "Free" && plan.price !== "Custom" && (
+              <span className="text-sm text-slate-500">starting</span>
+            )}
+          </div>
+          <p className="text-xs text-slate-500 mt-1">{plan.priceSub}</p>
+        </div>
+
+        {/* Description */}
+        <p className="text-sm text-slate-400 leading-relaxed mb-5">{plan.description}</p>
+
+        {/* Features */}
+        <ul className="space-y-2.5 mb-6 flex-1">
+          {plan.features.map((f) => (
+            <li key={f} className="flex items-start gap-2.5 text-sm text-slate-300">
+              <div
+                className="w-4 h-4 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5"
+                style={{ background: `${plan.color}20` }}
+              >
+                <Check className="w-2.5 h-2.5" style={{ color: plan.color }} />
+              </div>
+              {f}
+            </li>
+          ))}
+        </ul>
+
+        {/* CTA */}
+        <button
+          onClick={() => {
+            const el = document.getElementById("contact");
+            if (el) el.scrollIntoView({ behavior: "smooth" });
+          }}
+          className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl text-sm font-semibold transition-all duration-300"
+          style={
+            plan.recommended
+              ? {
+                  background: `linear-gradient(135deg, ${plan.color}, ${plan.color}cc)`,
+                  color: "white",
+                  boxShadow: `0 4px 20px ${plan.color}30`,
+                }
+              : {
+                  background: "rgba(255,255,255,0.05)",
+                  color: "#F8FAFC",
+                  border: "1px solid rgba(255,255,255,0.1)",
+                }
+          }
+        >
+          {plan.cta}
+          <ArrowRight className="w-3.5 h-3.5" />
+        </button>
+      </div>
+    </motion.div>
+  );
+}
+
 export default function PricingSection() {
-  const [showSecondary, setShowSecondary] = useState(false);
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section id="pricing" className="relative py-32 overflow-hidden border-t" style={{ borderColor: "rgba(255,255,255,0.05)", background: "#07111F" }}>
-      {/* Background styling */}
-      <div className="absolute top-0 left-0 w-full h-full pointer-events-none overflow-hidden">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] blur-[150px] opacity-20 rounded-full" style={{ background: "linear-gradient(90deg, #2563EB, #06B6D4)" }} />
-        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-[0.03]" />
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]" />
-      </div>
+    <section id="pricing" ref={ref} className="relative py-24 overflow-hidden" style={{ background: "#07111F" }}>
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/5 to-transparent" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center max-w-3xl mx-auto mb-20">
+      {/* BG accents */}
+      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-600/5 rounded-full blur-3xl" />
+      <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-violet-600/5 rounded-full blur-3xl" />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header */}
+        <div className="text-center mb-16">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5 }}
-            className="flex justify-center mb-4"
+            className="inline-flex mb-4"
           >
-            <span className="section-label" style={{ border: "1px solid rgba(37,99,235,0.3)", background: "rgba(37,99,235,0.1)" }}>
-              <Globe size={14} className="text-blue-400" />
-              <span className="text-blue-400 font-medium">Spotlix Ecosystem</span>
-            </span>
+            <span className="section-label">Transparent Pricing</span>
           </motion.div>
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-4xl md:text-5xl font-bold mb-6 text-slate-50 tracking-tight"
+            className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4"
           >
-            Premium Retail <span className="text-gradient-primary">Intelligence</span>
+            Intelligence That Fits{" "}
+            <span className="text-gradient-primary">Your Budget</span>
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-lg text-slate-400"
+            className="text-slate-400 max-w-2xl mx-auto"
           >
-            Enterprise-grade location analytics and business strategy systems. Invest in validation before you invest in leases.
+            From a free area scan to full enterprise expansion programs — choose the intelligence
+            level that matches your growth stage.
           </motion.p>
         </div>
 
-        {/* Main Plans */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-6xl mx-auto items-center mb-16">
-          {mainPlans.map((plan, index) => {
-            const isHighlight = plan.highlight;
-            const Icon = plan.icon;
-            return (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className={`relative rounded-3xl p-8 flex flex-col transition-all duration-300 hover:-translate-y-2 ${
-                  isHighlight 
-                    ? 'bg-slate-900 border border-blue-500 shadow-[0_0_50px_rgba(37,99,235,0.2)] lg:scale-105 z-10 lg:py-12' 
-                    : 'bg-white/5 border border-white/10 hover:border-white/20 hover:bg-white/10 hover:shadow-2xl hover:shadow-cyan-900/20 lg:py-8'
-                }`}
-                style={{
-                  background: isHighlight ? 'linear-gradient(180deg, rgba(7,17,31,1) 0%, rgba(15,30,55,1) 100%)' : 'rgba(255,255,255,0.03)',
-                  boxShadow: isHighlight ? '0 0 0 1px rgba(37,99,235,0.5), 0 0 30px rgba(37,99,235,0.2)' : 'none',
-                }}
-              >
-                {/* Animated Glowing Border for Highlighted Plan */}
-                {isHighlight && (
-                  <div className="absolute inset-0 rounded-3xl pointer-events-none" style={{ background: 'linear-gradient(45deg, transparent, rgba(37,99,235,0.3), transparent)', animation: 'spin 4s linear infinite', zIndex: -1, padding: 2 }} />
-                )}
-                
-                {isHighlight && (
-                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-blue-600 to-cyan-500 text-white text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-wider shadow-lg shadow-blue-500/30">
-                    Most Popular
-                  </div>
-                )}
-                
-                <div className="mb-6">
-                  <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-6" style={{ background: `rgba(255,255,255,0.05)`, border: `1px solid ${plan.color}40`, boxShadow: `0 0 20px ${plan.color}20` }}>
-                    <Icon size={24} color={plan.color} />
-                  </div>
-                  <h3 className="text-xl font-bold text-white mb-2">{plan.name}</h3>
-                  <div className="flex items-baseline gap-1 mb-3 flex-wrap">
-                    <span className="text-4xl font-bold tracking-tight text-white">{plan.price}</span>
-                    <span className="text-slate-400 text-lg font-medium">{plan.priceSuffix}</span>
-                  </div>
-                  <p className="text-sm" style={{ color: plan.color }}>{plan.desc}</p>
-                </div>
-
-                <div className="space-y-4 mb-10 flex-1">
-                  {plan.features.map((feature, i) => (
-                    <div key={i} className="flex items-start gap-3">
-                      <CheckCircle2 size={18} color={plan.color} className="shrink-0 mt-0.5" />
-                      <span className="text-sm text-slate-300 leading-tight">{feature}</span>
-                    </div>
-                  ))}
-                </div>
-
-                <a
-                  href="#contact"
-                  className={`w-full py-4 rounded-xl font-bold text-sm transition-all duration-300 flex items-center justify-center gap-2 ${
-                    isHighlight 
-                      ? 'text-white hover:scale-[1.02] active:scale-95' 
-                      : 'bg-white/10 text-white hover:bg-white/20 active:scale-95'
-                  }`}
-                  style={{
-                    background: isHighlight ? 'linear-gradient(135deg, #2563EB, #06B6D4)' : undefined,
-                    boxShadow: isHighlight ? '0 10px 20px -10px rgba(37,99,235,0.5)' : undefined,
-                  }}
-                >
-                  {plan.button}
-                </a>
-              </motion.div>
-            );
-          })}
+        {/* Plans Grid */}
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {plans.map((plan, i) => (
+            <PricingCard key={plan.name} plan={plan} index={i} inView={inView} />
+          ))}
         </div>
 
-        {/* Expandable Secondary Plans */}
-        <div className="max-w-4xl mx-auto">
-          <motion.button
-            onClick={() => setShowSecondary(!showSecondary)}
-            className="mx-auto flex items-center gap-2 px-6 py-3 rounded-full border text-sm font-medium transition-colors"
-            style={{ borderColor: "rgba(255,255,255,0.1)", color: "#94A3B8", background: "rgba(255,255,255,0.02)" }}
-            whileHover={{ background: "rgba(255,255,255,0.05)", color: "#fff" }}
-          >
-            {showSecondary ? "Hide Additional Options" : "View Additional Services"}
-            <motion.div animate={{ rotate: showSecondary ? 180 : 0 }} transition={{ duration: 0.3 }}>
-              <ChevronDown size={16} />
-            </motion.div>
-          </motion.button>
-
-          <AnimatePresence>
-            {showSecondary && (
-              <motion.div
-                initial={{ opacity: 0, height: 0, marginTop: 0 }}
-                animate={{ opacity: 1, height: "auto", marginTop: 32 }}
-                exit={{ opacity: 0, height: 0, marginTop: 0 }}
-                transition={{ duration: 0.5, ease: "easeInOut" }}
-                className="overflow-hidden"
-              >
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                  {secondaryPlans.map((plan, index) => (
-                    <div key={index} className="rounded-2xl p-6" style={{ background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.05)" }}>
-                      <h4 className="text-base font-bold text-white mb-1">{plan.name}</h4>
-                      <p className="text-xl font-bold text-slate-300 mb-2">{plan.price}</p>
-                      <p className="text-xs text-blue-400 mb-6">{plan.desc}</p>
-                      <div className="space-y-3">
-                        {plan.features.map((feature, i) => (
-                          <div key={i} className="flex items-start gap-2">
-                            <span className="text-slate-600 mt-0.5">•</span>
-                            <span className="text-xs text-slate-400 leading-tight">{feature}</span>
-                          </div>
-                        ))}
-                      </div>
-                      <a href="#contact" className="mt-6 block w-full py-2.5 rounded-lg text-center text-xs font-semibold" style={{ background: "rgba(255,255,255,0.05)", color: "#E2E8F0" }}>
-                        Talk With Our Strategy Team
-                      </a>
-                    </div>
-                  ))}
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
+        {/* Bottom note */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5, delay: 0.7 }}
+          className="text-center mt-12 text-sm text-slate-500"
+        >
+          All plans are fully customizable. <span className="text-blue-400">Contact us</span> for enterprise agreements and custom scopes.
+        </motion.div>
       </div>
     </section>
   );

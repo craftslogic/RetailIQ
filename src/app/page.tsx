@@ -1,47 +1,33 @@
 import Navbar from "@/components/navbar";
 import HeroSection from "@/components/hero-section";
-import TrustSection from "@/components/trust-section";
-import DashboardPreviewSection from "@/components/dashboard-preview-section";
-import LocationIntelligenceSection from "@/components/location-intelligence-section";
-import SuccessProbabilitySection from "@/components/success-probability-section";
-import RevenueForecastingSection from "@/components/revenue-forecasting-section";
-import StoreOptimizationSection from "@/components/store-optimization-section";
-import CompetitorIntelligenceSection from "@/components/competitor-intelligence-section";
-import BusinessFailureSection from "@/components/business-failure-section";
-import StoreBrandingSection from "@/components/store-branding-section";
-import ProcessSection from "@/components/process-section";
-import IdealCustomerSection from "@/components/ideal-customer-section";
+import StatsSection from "@/components/stats-section";
 import FeaturesSection from "@/components/features-section";
-import SuccessStoriesSection from "@/components/success-stories-section";
+import HowItWorksSection from "@/components/how-it-works-section";
+import AboutPreviewSection from "@/components/about-preview-section";
+import IndustriesSection from "@/components/industries-section";
 import PricingSection from "@/components/pricing-section";
-import SocialProofSection from "@/components/social-proof-section";
-import FinalCtaSection from "@/components/final-cta-section";
+import TestimonialsSection from "@/components/testimonials-section";
+import FAQSection from "@/components/faq-section";
 import ContactSection from "@/components/contact-section";
 import Footer from "@/components/footer";
 
 export default function HomePage() {
   return (
-    <main className="bg-slate-950 min-h-screen text-slate-50 selection:bg-blue-500/30 selection:text-blue-200">
+    <>
       <Navbar />
-      <HeroSection />
-      <TrustSection />
-      <DashboardPreviewSection />
-      <LocationIntelligenceSection />
-      <SuccessProbabilitySection />
-      <CompetitorIntelligenceSection />
-      <RevenueForecastingSection />
-      <StoreOptimizationSection />
-      <StoreBrandingSection />
-      <BusinessFailureSection />
-      <ProcessSection />
-      <IdealCustomerSection />
-      <FeaturesSection />
-      <SuccessStoriesSection />
-      <SocialProofSection />
-      <PricingSection />
-      <FinalCtaSection />
-      <ContactSection />
+      <main>
+        <HeroSection />
+        <StatsSection />
+        <FeaturesSection />
+        <HowItWorksSection />
+        <AboutPreviewSection />
+        <IndustriesSection />
+        <PricingSection />
+        <TestimonialsSection />
+        <FAQSection />
+        <ContactSection />
+      </main>
       <Footer />
-    </main>
+    </>
   );
 }

@@ -1,223 +1,324 @@
 "use client";
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Mail, Phone, MapPin, Send, CheckCircle, Loader2, AlertCircle } from "lucide-react";
-import { sendEmail } from "@/lib/emailjs";
+import { useRef, useState } from "react";
+import { motion, useInView } from "framer-motion";
+import { Send, CheckCircle, AlertCircle, Loader2, Mail, Phone, MapPin } from "lucide-react";
+import emailjs from "@emailjs/browser";
+
+const SERVICE_ID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || "YOUR_SERVICE_ID";
+const TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || "YOUR_TEMPLATE_ID";
+const PUBLIC_KEY = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || "YOUR_PUBLIC_KEY";
+
+type FormState = "idle" | "loading" | "success" | "error";
+
+const businessTypes = [
+  "Restaurant / Food & Beverage",
+  "Café / Coffee Shop",
+  "Retail / Fashion Brand",
+  "Shoe Brand / Footwear",
+  "Clothing Store",
+  "Salon / Spa / Beauty",
+  "Franchise Business",
+  "Startup / New Concept",
+  "Local Business",
+  "Commercial Investment",
+  "Other",
+];
+
+const budgetRanges = [
+  "Under $5,000",
+  "$5,000 – $25,000",
+  "$25,000 – $100,000",
+  "$100,000 – $500,000",
+  "$500,000+",
+  "Prefer not to say",
+];
 
 export default function ContactSection() {
-  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
-  const [errorMessage, setErrorMessage] = useState("");
-  const [form, setForm] = useState({
-    name: "",
-    email: "",
-    business: "",
-    area: "",
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: "-80px" });
+
+  const [formData, setFormData] = useState({
+    from_name: "",
+    from_email: "",
+    business_type: "",
+    preferred_area: "",
     budget: "",
-    goals: ""
+    business_goals: "",
   });
+  const [status, setStatus] = useState<FormState>("idle");
+  const [errors, setErrors] = useState<Partial<typeof formData>>({});
+
+  const validate = () => {
+    const newErrors: Partial<typeof formData> = {};
+    if (!formData.from_name.trim()) newErrors.from_name = "Name is required";
+    if (!formData.from_email.trim() || !/\S+@\S+\.\S+/.test(formData.from_email))
+      newErrors.from_email = "Valid email is required";
+    if (!formData.business_type) newErrors.business_type = "Please select a business type";
+    if (!formData.preferred_area.trim()) newErrors.preferred_area = "Target location is required";
+    if (!formData.business_goals.trim()) newErrors.business_goals = "Please describe your goals";
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setStatus("loading");
-    setErrorMessage("");
+    if (!validate()) return;
 
+    setStatus("loading");
     try {
-      await sendEmail({
-        to_name: "Spotlix Team",
-        from_name: form.name,
-        from_email: form.email,
-        business_type: form.business,
-        preferred_area: form.area,
-        budget: form.budget,
-        business_goals: form.goals,
-      });
+      await emailjs.send(
+        SERVICE_ID,
+        TEMPLATE_ID,
+        {
+          to_name: "Spotlix Team",
+          from_name: formData.from_name,
+          from_email: formData.from_email,
+          business_type: formData.business_type,
+          preferred_area: formData.preferred_area,
+          budget: formData.budget || "Not specified",
+          business_goals: formData.business_goals,
+        },
+        PUBLIC_KEY
+      );
       setStatus("success");
-      setForm({ name: "", email: "", business: "", area: "", budget: "", goals: "" });
-    } catch (error) {
-      console.error(error);
+      setFormData({ from_name: "", from_email: "", business_type: "", preferred_area: "", budget: "", business_goals: "" });
+    } catch {
       setStatus("error");
-      setErrorMessage("Failed to send message. Please try again or email us directly.");
     }
   };
 
-  return (
-    <section id="contact" className="relative py-24 overflow-hidden">
-      <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse 60% 50% at 50% 50%, rgba(37,99,235,0.07) 0%, transparent 70%)" }} />
+  const inputClass = (field: keyof typeof formData) =>
+    `w-full px-4 py-3 rounded-xl text-sm text-white placeholder-slate-500 transition-all duration-200 outline-none focus:ring-2 ${
+      errors[field]
+        ? "ring-1 ring-red-500/50 bg-red-500/5 border border-red-500/20"
+        : "bg-white/4 border border-white/8 focus:border-blue-500/40 focus:ring-blue-500/20 focus:bg-white/6"
+    }`;
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 items-start">
-          {/* Left */}
+  return (
+    <section id="contact" ref={ref} className="relative py-24 overflow-hidden" style={{ background: "#061020" }}>
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-blue-500/20 to-transparent" />
+
+      {/* BG */}
+      <div className="absolute top-1/4 right-0 w-96 h-96 bg-blue-600/6 rounded-full blur-3xl" />
+      <div className="absolute bottom-1/4 left-0 w-80 h-80 bg-cyan-600/5 rounded-full blur-3xl" />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid lg:grid-cols-2 gap-16 items-start">
+          {/* Left: Info */}
           <div>
-            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="mb-4">
-              <span className="section-label"><Mail size={11} />Get In Touch</span>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5 }}
+              className="inline-flex mb-6"
+            >
+              <span className="section-label">Get Started</span>
             </motion.div>
-            <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.1 }}
-              className="text-3xl sm:text-4xl font-bold mb-4" style={{ color: "#F8FAFC", letterSpacing: "-0.02em" }}>
-              Ready to <span className="text-gradient-primary">Launch Smarter?</span>
+
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="text-3xl sm:text-4xl font-bold text-white mb-5"
+            >
+              Start Your{" "}
+              <span className="text-gradient-primary">Intelligence Analysis</span>
             </motion.h2>
-            <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.2 }}
-              className="text-base leading-relaxed mb-10" style={{ color: "#94A3B8", maxWidth: 440 }}>
-              Book a free 30-minute strategy call with our retail intelligence team. We'll analyze your target location and business category on the spot.
+
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="text-slate-400 leading-relaxed mb-8"
+            >
+              Tell us about your business and target market. Our team will review your request
+              and match you with the right intelligence package to drive your launch or expansion.
             </motion.p>
 
-            {/* Contact details */}
-            <div className="space-y-4 mb-10">
+            {/* Contact info */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              className="space-y-4 mb-8"
+            >
               {[
-                { icon: Mail, label: "Email Us", value: "hello@spotlix.io", color: "#2563EB" },
-                { icon: Phone, label: "Call Us", value: "+92 300 0000000", color: "#10B981" },
-                { icon: MapPin, label: "Based In", value: "Karachi, Pakistan", color: "#06B6D4" },
-              ].map(({ icon: Icon, label, value, color }, i) => (
-                <motion.div key={i} initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: i * 0.1 }}
-                  className="flex items-center gap-4">
-                  <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: `${color}18`, border: `1px solid ${color}28` }}>
-                    <Icon size={16} color={color} />
+                { icon: Mail, label: "Email", value: "hello@spotlix.io" },
+                { icon: Phone, label: "Response Time", value: "Within 24 business hours" },
+                { icon: MapPin, label: "Coverage", value: "Global — all markets" },
+              ].map((item) => (
+                <div key={item.label} className="flex items-center gap-4">
+                  <div className="w-10 h-10 rounded-xl bg-blue-500/15 border border-blue-500/20 flex items-center justify-center flex-shrink-0">
+                    <item.icon className="w-4 h-4 text-blue-400" />
                   </div>
                   <div>
-                    <p className="text-xs font-medium" style={{ color: "#64748B" }}>{label}</p>
-                    <p className="text-sm font-semibold" style={{ color: "#E2E8F0" }}>{value}</p>
+                    <p className="text-xs text-slate-500">{item.label}</p>
+                    <p className="text-sm font-medium text-white">{item.value}</p>
                   </div>
-                </motion.div>
+                </div>
               ))}
-            </div>
+            </motion.div>
 
-            {/* What you get box */}
-            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.3 }}
-              className="rounded-2xl p-5" style={{ background: "rgba(16,185,129,0.08)", border: "1px solid rgba(16,185,129,0.2)" }}>
-              <p className="text-sm font-bold mb-3" style={{ color: "#10B981" }}>What you get in the free call:</p>
-              <div className="space-y-2">
-                {["Location viability score for your target area", "Top 3 competitor threats identified", "Demand category recommendations", "Custom launch timeline estimate"].map((item, i) => (
-                  <div key={i} className="flex items-start gap-2">
-                    <CheckCircle size={14} color="#10B981" className="mt-0.5 flex-shrink-0" />
-                    <p className="text-xs" style={{ color: "#94A3B8" }}>{item}</p>
-                  </div>
-                ))}
-              </div>
+            {/* Assurance note */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5, delay: 0.4 }}
+              className="glass-card rounded-xl p-4"
+            >
+              <p className="text-xs text-slate-400 leading-relaxed">
+                🔒 <span className="text-white font-medium">100% Confidential.</span>{" "}
+                All business information shared with Spotlix is kept strictly confidential and never shared with third parties.
+              </p>
             </motion.div>
           </div>
 
-          {/* Right — Form */}
-          <motion.div initial={{ opacity: 0, x: 40 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }}>
-            <div className="relative rounded-3xl p-8 overflow-hidden" style={{ background: "rgba(15, 23, 42, 0.6)", border: "1px solid rgba(56, 189, 248, 0.2)", boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.5)" }}>
-              {/* Subtle background glow */}
-              <div className="absolute top-0 right-0 -mr-16 -mt-16 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
-
-              <AnimatePresence mode="wait">
-                {status === "success" ? (
-                  <motion.div 
-                    key="success"
-                    initial={{ opacity: 0, scale: 0.9 }} 
-                    animate={{ opacity: 1, scale: 1 }} 
-                    exit={{ opacity: 0, scale: 0.9 }}
-                    className="flex flex-col items-center justify-center py-16 text-center h-full"
-                  >
-                    <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ type: "spring", duration: 0.6, delay: 0.1 }}
-                      className="w-20 h-20 rounded-full flex items-center justify-center mb-6" style={{ background: "rgba(16,185,129,0.15)", border: "1px solid rgba(16,185,129,0.3)" }}>
-                      <CheckCircle size={40} color="#10B981" />
-                    </motion.div>
-                    <h3 className="text-2xl font-bold mb-3 text-white">Intelligence Request Sent</h3>
-                    <p className="text-slate-400 mb-8 max-w-[280px]">Our retail intelligence team will review your details and reach out shortly.</p>
-                    <button 
-                      onClick={() => setStatus("idle")}
-                      className="text-sm font-medium text-blue-400 hover:text-blue-300 transition-colors"
-                    >
-                      Submit another request
-                    </button>
-                  </motion.div>
-                ) : (
-                  <motion.form 
-                    key="form"
-                    initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-                    onSubmit={handleSubmit} 
-                    className="space-y-5 relative z-10"
-                  >
-                    <div className="mb-6">
-                      <h3 className="text-xl font-bold text-white mb-2">Initialize Analysis</h3>
-                      <p className="text-sm text-slate-400">Fill in the parameters below to begin.</p>
-                    </div>
-
-                    {status === "error" && (
-                      <div className="flex items-center gap-2 p-3 rounded-lg bg-red-500/10 border border-red-500/20 text-red-400 text-sm mb-4">
-                        <AlertCircle size={16} />
-                        <span>{errorMessage}</span>
-                      </div>
-                    )}
-
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                      {[
-                        { key: "name", label: "Full Name", placeholder: "Aliyan Khan", type: "text" },
-                        { key: "email", label: "Email Address", placeholder: "you@company.com", type: "email" },
-                        { key: "business", label: "Business Type", placeholder: "e.g. Café, Clothing Store", type: "text" },
-                        { key: "area", label: "Preferred City/Area", placeholder: "e.g. Gulshan, Karachi", type: "text" },
-                        { key: "budget", label: "Budget", placeholder: "e.g. $50k - $100k", type: "text" },
-                      ].map(({ key, label, placeholder, type }) => (
-                        <div key={key} className={key === 'business' || key === 'area' || key === 'budget' ? 'col-span-1' : 'col-span-1 sm:col-span-2'}>
-                          <label className="block text-xs font-semibold mb-2 text-slate-400 tracking-wide uppercase">{label}</label>
-                          <input
-                            type={type}
-                            name={key}
-                            placeholder={placeholder}
-                            value={form[key as keyof typeof form]}
-                            onChange={(e) => setForm({ ...form, [key]: e.target.value })}
-                            required={key === 'name' || key === 'email'}
-                            disabled={status === "loading"}
-                            className="w-full px-4 py-3 rounded-xl text-sm outline-none transition-all duration-300 disabled:opacity-50"
-                            style={{
-                              background: "rgba(255,255,255,0.03)",
-                              border: "1px solid rgba(255,255,255,0.1)",
-                              color: "#F8FAFC",
-                            }}
-                            onFocus={(e) => { e.target.style.borderColor = "rgba(56, 189, 248, 0.5)"; e.target.style.background = "rgba(255,255,255,0.05)"; }}
-                            onBlur={(e) => { e.target.style.borderColor = "rgba(255,255,255,0.1)"; e.target.style.background = "rgba(255,255,255,0.03)"; }}
-                          />
-                        </div>
-                      ))}
-                    </div>
-
+          {/* Right: Form */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            animate={inView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
+            <div className="glass-card rounded-2xl p-6 sm:p-8 glow-border-primary">
+              {/* Success state */}
+              {status === "success" ? (
+                <div className="text-center py-10">
+                  <div className="w-16 h-16 rounded-full bg-green-500/15 border border-green-500/30 flex items-center justify-center mx-auto mb-4">
+                    <CheckCircle className="w-8 h-8 text-green-400" />
+                  </div>
+                  <h3 className="text-xl font-bold text-white mb-2">Request Received!</h3>
+                  <p className="text-slate-400 text-sm mb-6">
+                    Our team will review your business details and reach out within 24 business hours.
+                  </p>
+                  <button onClick={() => setStatus("idle")} className="btn-secondary text-sm">
+                    Submit Another Request
+                  </button>
+                </div>
+              ) : (
+                <form onSubmit={handleSubmit} className="space-y-5">
+                  <div className="grid sm:grid-cols-2 gap-4">
+                    {/* Name */}
                     <div>
-                      <label className="block text-xs font-semibold mb-2 text-slate-400 tracking-wide uppercase">Business Goals</label>
-                      <textarea
-                        name="goals"
-                        rows={3}
-                        placeholder="What are you trying to achieve? Tell us about your timeline and expectations..."
-                        value={form.goals}
-                        onChange={(e) => setForm({ ...form, goals: e.target.value })}
-                        disabled={status === "loading"}
-                        className="w-full px-4 py-3 rounded-xl text-sm outline-none resize-none transition-all duration-300 disabled:opacity-50"
-                        style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.1)", color: "#F8FAFC" }}
-                        onFocus={(e) => { e.target.style.borderColor = "rgba(56, 189, 248, 0.5)"; e.target.style.background = "rgba(255,255,255,0.05)"; }}
-                        onBlur={(e) => { e.target.style.borderColor = "rgba(255,255,255,0.1)"; e.target.style.background = "rgba(255,255,255,0.03)"; }}
+                      <label className="block text-xs font-medium text-slate-400 mb-2">Full Name *</label>
+                      <input
+                        type="text"
+                        placeholder="Your name"
+                        value={formData.from_name}
+                        onChange={(e) => setFormData((p) => ({ ...p, from_name: e.target.value }))}
+                        className={inputClass("from_name")}
                       />
+                      {errors.from_name && <p className="text-red-400 text-xs mt-1">{errors.from_name}</p>}
                     </div>
 
-                    <button 
-                      type="submit" 
-                      disabled={status === "loading"}
-                      className="w-full py-4 mt-4 rounded-xl font-bold text-sm text-white flex items-center justify-center gap-2 transition-all duration-300 hover:scale-[1.02] active:scale-95 disabled:opacity-70 disabled:hover:scale-100 relative overflow-hidden group"
-                      style={{
-                        background: "linear-gradient(135deg, #2563EB, #06B6D4)",
-                        boxShadow: "0 10px 20px -10px rgba(37,99,235,0.5)",
-                      }}
+                    {/* Email */}
+                    <div>
+                      <label className="block text-xs font-medium text-slate-400 mb-2">Email Address *</label>
+                      <input
+                        type="email"
+                        placeholder="you@company.com"
+                        value={formData.from_email}
+                        onChange={(e) => setFormData((p) => ({ ...p, from_email: e.target.value }))}
+                        className={inputClass("from_email")}
+                      />
+                      {errors.from_email && <p className="text-red-400 text-xs mt-1">{errors.from_email}</p>}
+                    </div>
+                  </div>
+
+                  {/* Business Type */}
+                  <div>
+                    <label className="block text-xs font-medium text-slate-400 mb-2">Business Type *</label>
+                    <select
+                      value={formData.business_type}
+                      onChange={(e) => setFormData((p) => ({ ...p, business_type: e.target.value }))}
+                      className={`${inputClass("business_type")} cursor-pointer`}
+                      style={{ background: "#0d1e35" }}
                     >
-                      {/* Button shine effect */}
-                      <div className="absolute inset-0 -translate-x-full group-hover:animate-[shimmer_1.5s_infinite] bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12" />
-                      
-                      {status === "loading" ? (
-                        <>
-                          <Loader2 size={18} className="animate-spin" />
-                          Processing...
-                        </>
-                      ) : (
-                        <>
-                          <Send size={16} />
-                          Analyze My Business
-                        </>
-                      )}
-                    </button>
-                    <p className="text-xs text-center mt-4 text-slate-500">Secure AES-256 transmission. Your data is protected.</p>
-                  </motion.form>
-                )}
-              </AnimatePresence>
+                      <option value="" disabled>Select your business type</option>
+                      {businessTypes.map((t) => (
+                        <option key={t} value={t}>{t}</option>
+                      ))}
+                    </select>
+                    {errors.business_type && <p className="text-red-400 text-xs mt-1">{errors.business_type}</p>}
+                  </div>
+
+                  <div className="grid sm:grid-cols-2 gap-4">
+                    {/* Location */}
+                    <div>
+                      <label className="block text-xs font-medium text-slate-400 mb-2">Target City / Area *</label>
+                      <input
+                        type="text"
+                        placeholder="e.g., Downtown Chicago"
+                        value={formData.preferred_area}
+                        onChange={(e) => setFormData((p) => ({ ...p, preferred_area: e.target.value }))}
+                        className={inputClass("preferred_area")}
+                      />
+                      {errors.preferred_area && <p className="text-red-400 text-xs mt-1">{errors.preferred_area}</p>}
+                    </div>
+
+                    {/* Budget */}
+                    <div>
+                      <label className="block text-xs font-medium text-slate-400 mb-2">Investment Budget</label>
+                      <select
+                        value={formData.budget}
+                        onChange={(e) => setFormData((p) => ({ ...p, budget: e.target.value }))}
+                        className={`${inputClass("budget")} cursor-pointer`}
+                        style={{ background: "#0d1e35" }}
+                      >
+                        <option value="">Select range (optional)</option>
+                        {budgetRanges.map((r) => (
+                          <option key={r} value={r}>{r}</option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+
+                  {/* Goals */}
+                  <div>
+                    <label className="block text-xs font-medium text-slate-400 mb-2">Business Goals & Details *</label>
+                    <textarea
+                      rows={4}
+                      placeholder="Describe your business concept, goals, timeline, and any specific market questions..."
+                      value={formData.business_goals}
+                      onChange={(e) => setFormData((p) => ({ ...p, business_goals: e.target.value }))}
+                      className={`${inputClass("business_goals")} resize-none`}
+                    />
+                    {errors.business_goals && <p className="text-red-400 text-xs mt-1">{errors.business_goals}</p>}
+                  </div>
+
+                  {/* Error banner */}
+                  {status === "error" && (
+                    <div className="flex items-center gap-3 p-3 rounded-xl bg-red-500/10 border border-red-500/20">
+                      <AlertCircle className="w-4 h-4 text-red-400 flex-shrink-0" />
+                      <p className="text-xs text-red-300">Something went wrong. Please try again or email us directly at hello@spotlix.io</p>
+                    </div>
+                  )}
+
+                  {/* Submit */}
+                  <button
+                    type="submit"
+                    disabled={status === "loading"}
+                    className="btn-primary w-full justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
+                  >
+                    {status === "loading" ? (
+                      <>
+                        <Loader2 className="w-4 h-4 animate-spin" />
+                        Sending Request...
+                      </>
+                    ) : (
+                      <>
+                        <Send className="w-4 h-4" />
+                        Send Intelligence Request
+                      </>
+                    )}
+                  </button>
+
+                  <p className="text-center text-xs text-slate-600">
+                    By submitting, you agree to our{" "}
+                    <a href="/privacy-policy" className="text-slate-400 hover:text-white underline">Privacy Policy</a>
+                  </p>
+                </form>
+              )}
             </div>
           </motion.div>
         </div>

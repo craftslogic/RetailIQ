@@ -1,33 +1,59 @@
-"use client";
+import type { Metadata } from "next";
+import { PolicyLayout, PolicySection, PolicyList } from "@/components/policy-layout";
 
-import Navbar from "@/components/navbar";
-import Footer from "@/components/footer";
+export const metadata: Metadata = {
+  title: "Disclaimer — Spotlix",
+  description: "Spotlix Disclaimer — Important information about the nature of our intelligence services.",
+};
 
 export default function DisclaimerPage() {
   return (
-    <main className="bg-[#07111F] min-h-screen text-slate-50 selection:bg-blue-500/30 selection:text-blue-200">
-      <Navbar />
-      <div className="pt-32 pb-24 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h1 className="text-3xl md:text-5xl font-bold mb-4 text-white">Disclaimer</h1>
-        <p className="text-slate-400 mb-12">Effective Date: January 1, 2026</p>
-        
-        <div className="prose prose-invert prose-blue max-w-none space-y-6 text-slate-300">
-          <p>Spotlix provides strategic market intelligence, location analysis, competitor research, and business feasibility recommendations intended for informational and operational purposes only.</p>
-          <p>Spotlix does not guarantee:</p>
-          <ul className="list-disc pl-5">
-            <li>business profitability</li>
-            <li>successful expansion</li>
-            <li>revenue growth</li>
-            <li>customer acquisition</li>
-            <li>market dominance</li>
-            <li>operational success</li>
-            <li>investment outcomes</li>
-          </ul>
-          <p>Business performance depends on multiple external factors including execution quality, local competition, economic conditions, market behavior, operational management, and customer demand.</p>
-          <p>Users acknowledge that all business activities involve inherent risks and that strategic recommendations do not guarantee future results.</p>
-        </div>
-      </div>
-      <Footer />
-    </main>
+    <PolicyLayout title="Disclaimer" effectiveDate="January 1, 2026">
+      <PolicySection title="Nature of Services">
+        <p>
+          Spotlix provides strategic market intelligence, location analysis, competitor research, and business
+          feasibility recommendations intended for informational and operational purposes only.
+        </p>
+      </PolicySection>
+
+      <PolicySection title="No Guarantees">
+        <p>Spotlix does not guarantee:</p>
+        <PolicyList items={[
+          "Business profitability or financial returns",
+          "Successful expansion or market entry",
+          "Revenue growth or customer acquisition",
+          "Market dominance or competitive advantage",
+          "Operational success or business survival",
+          "Investment outcomes or ROI",
+        ]} />
+      </PolicySection>
+
+      <PolicySection title="External Factors">
+        <p>
+          Business performance depends on multiple external factors including execution quality, local competition,
+          economic conditions, market behavior, operational management, and customer demand. These factors are
+          beyond Spotlix&apos;s control and cannot be predicted with certainty.
+        </p>
+      </PolicySection>
+
+      <PolicySection title="User Responsibility">
+        <p>
+          Users acknowledge that all business activities involve inherent risks and that strategic recommendations
+          do not guarantee future results. All final business decisions, investments, and operational activities
+          remain the sole responsibility of the user.
+        </p>
+      </PolicySection>
+
+      <PolicySection title="Professional Advice">
+        <p>
+          Spotlix intelligence reports are not a substitute for professional legal, financial, or business advisory
+          services. Users are encouraged to consult qualified professionals before making significant business decisions.
+        </p>
+        <p className="mt-3">
+          For questions about this disclaimer, contact:{" "}
+          <a href="mailto:hello@spotlix.io" className="text-blue-400 hover:text-blue-300">hello@spotlix.io</a>
+        </p>
+      </PolicySection>
+    </PolicyLayout>
   );
 }

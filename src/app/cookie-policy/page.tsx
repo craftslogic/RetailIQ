@@ -1,24 +1,58 @@
-"use client";
+import type { Metadata } from "next";
+import { PolicyLayout, PolicySection, PolicyList } from "@/components/policy-layout";
 
-import Navbar from "@/components/navbar";
-import Footer from "@/components/footer";
+export const metadata: Metadata = {
+  title: "Cookie Policy — Spotlix",
+  description: "Spotlix Cookie Policy — How we use cookies and tracking technologies.",
+};
 
 export default function CookiePolicyPage() {
   return (
-    <main className="bg-[#07111F] min-h-screen text-slate-50 selection:bg-blue-500/30 selection:text-blue-200">
-      <Navbar />
-      <div className="pt-32 pb-24 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h1 className="text-3xl md:text-5xl font-bold mb-4 text-white">Cookie Policy</h1>
-        <p className="text-slate-400 mb-12">Effective Date: January 1, 2026</p>
-        
-        <div className="prose prose-invert prose-blue max-w-none space-y-6 text-slate-300">
-          <p>Spotlix uses cookies and analytics technologies to improve user experience, optimize platform functionality, monitor traffic patterns, improve operational systems, and enhance security protections.</p>
-          <p>Cookies may collect information related to browser activity, device information, session analytics, and interaction behavior.</p>
-          <p>Users may disable cookies through browser settings; however, certain platform features may become limited.</p>
-          <p>By continuing to use Spotlix, users consent to the use of cookies and related tracking technologies.</p>
-        </div>
-      </div>
-      <Footer />
-    </main>
+    <PolicyLayout title="Cookie Policy" effectiveDate="January 1, 2026">
+      <PolicySection title="Use of Cookies">
+        <p>
+          Spotlix uses cookies and analytics technologies to improve user experience, optimize platform functionality,
+          monitor traffic patterns, improve operational systems, and enhance security protections.
+        </p>
+      </PolicySection>
+
+      <PolicySection title="What Cookies Collect">
+        <p>Cookies may collect information related to:</p>
+        <PolicyList items={[
+          "Browser activity and device information",
+          "Session analytics and interaction behavior",
+          "Geographic region and language preferences",
+          "Platform performance and load time metrics",
+          "Traffic sources and referral data",
+        ]} />
+      </PolicySection>
+
+      <PolicySection title="Types of Cookies">
+        <PolicyList items={[
+          "Essential Cookies — Required for core platform functionality",
+          "Analytics Cookies — Used to understand platform usage patterns",
+          "Performance Cookies — Used to optimize load times and functionality",
+          "Security Cookies — Used to detect and prevent fraudulent activity",
+        ]} />
+      </PolicySection>
+
+      <PolicySection title="Managing Cookies">
+        <p>
+          Users may disable cookies through browser settings; however, certain platform features may become limited
+          or unavailable. Instructions for disabling cookies can be found in your browser&apos;s help documentation.
+        </p>
+      </PolicySection>
+
+      <PolicySection title="Consent">
+        <p>
+          By continuing to use Spotlix, users consent to the use of cookies and related tracking technologies as
+          described in this policy.
+        </p>
+        <p className="mt-3">
+          For cookie-related questions, contact us at{" "}
+          <a href="mailto:privacy@spotlix.io" className="text-blue-400 hover:text-blue-300">privacy@spotlix.io</a>
+        </p>
+      </PolicySection>
+    </PolicyLayout>
   );
 }
