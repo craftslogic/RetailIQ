@@ -10,7 +10,6 @@ const features = [
     title: "Location Analysis",
     description: "Identify high-potential business locations using market intelligence and local demand insights.",
     color: "#2563EB",
-    gradient: "from-blue-500/20 to-blue-600/5",
     tags: ["Foot Traffic", "Demographics", "Zone Mapping"],
   },
   {
@@ -18,7 +17,6 @@ const features = [
     title: "Competitor Research",
     description: "Analyze nearby competitors, market saturation, and customer behavior patterns comprehensively.",
     color: "#06B6D4",
-    gradient: "from-cyan-500/20 to-cyan-600/5",
     tags: ["Gap Analysis", "Pricing Study", "Market Share"],
   },
   {
@@ -26,7 +24,6 @@ const features = [
     title: "Demand Intelligence",
     description: "Understand purchasing behavior, local demand patterns, and commercial opportunities in your target market.",
     color: "#8B5CF6",
-    gradient: "from-violet-500/20 to-violet-600/5",
     tags: ["Consumer Data", "Trend Analysis", "Opportunity Mapping"],
   },
   {
@@ -34,7 +31,6 @@ const features = [
     title: "Business Feasibility",
     description: "Evaluate whether a business idea can scale successfully within a specific market or location.",
     color: "#10B981",
-    gradient: "from-emerald-500/20 to-emerald-600/5",
     tags: ["ROI Projection", "Risk Assessment", "Scalability Score"],
   },
   {
@@ -42,7 +38,6 @@ const features = [
     title: "Expansion Strategy",
     description: "Plan smarter expansion and scaling strategies for physical businesses entering new markets.",
     color: "#F59E0B",
-    gradient: "from-amber-500/20 to-amber-600/5",
     tags: ["Multi-Location", "Growth Planning", "Market Entry"],
   },
   {
@@ -50,21 +45,18 @@ const features = [
     title: "Launch Support",
     description: "Get comprehensive launch frameworks including branding systems, positioning, and go-to-market strategies.",
     color: "#EF4444",
-    gradient: "from-red-500/20 to-red-600/5",
     tags: ["Brand Strategy", "GTM Planning", "Launch Framework"],
   },
 ];
 
 const containerVariants = {
   hidden: {},
-  visible: {
-    transition: { staggerChildren: 0.1 },
-  },
+  visible: { transition: { staggerChildren: 0.1 } },
 };
 
 const cardVariants = {
   hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" as const } },
 };
 
 export default function FeaturesSection() {
@@ -72,12 +64,7 @@ export default function FeaturesSection() {
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="features" ref={ref} className="relative py-24 overflow-hidden" style={{ background: "#07111F" }}>
-      {/* Background elements */}
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/5 to-transparent" />
-      <div className="absolute top-1/2 left-0 w-80 h-80 bg-blue-600/5 rounded-full blur-3xl" />
-      <div className="absolute top-1/2 right-0 w-80 h-80 bg-cyan-600/5 rounded-full blur-3xl" />
-
+    <section id="features" ref={ref} className="relative py-24 overflow-hidden bg-[#07111F]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section header */}
         <div className="text-center mb-16">
@@ -87,7 +74,9 @@ export default function FeaturesSection() {
             transition={{ duration: 0.5 }}
             className="inline-flex mb-4"
           >
-            <span className="section-label">Platform Capabilities</span>
+            <span className="inline-flex items-center gap-2 bg-blue-500/10 border border-blue-500/25 text-blue-400 px-3.5 py-1 rounded-full text-xs font-semibold uppercase tracking-widest">
+              Platform Capabilities
+            </span>
           </motion.div>
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -96,7 +85,9 @@ export default function FeaturesSection() {
             className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4"
           >
             Everything You Need to{" "}
-            <span className="text-gradient-primary">Launch Smarter</span>
+            <span className="bg-gradient-to-r from-blue-500 to-cyan-400 bg-clip-text text-transparent">
+              Launch Smarter
+            </span>
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -120,20 +111,8 @@ export default function FeaturesSection() {
             <motion.div
               key={feature.title}
               variants={cardVariants}
-              className="relative group glass-card rounded-2xl p-6 glass-card-hover overflow-hidden cursor-default"
+              className="relative group bg-white/[0.03] border border-white/[0.08] rounded-2xl p-6 overflow-hidden cursor-default hover:bg-white/[0.06] hover:border-blue-500/40 hover:-translate-y-1 transition-all duration-300"
             >
-              {/* Hover glow */}
-              <div
-                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl"
-                style={{ background: `radial-gradient(circle at 50% 0%, ${feature.color}12, transparent 70%)` }}
-              />
-
-              {/* Top border accent */}
-              <div
-                className="absolute top-0 left-0 right-0 h-px opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                style={{ background: `linear-gradient(90deg, transparent, ${feature.color}66, transparent)` }}
-              />
-
               <div className="relative z-10">
                 {/* Icon */}
                 <div
@@ -144,12 +123,8 @@ export default function FeaturesSection() {
                 </div>
 
                 {/* Content */}
-                <h3 className="text-lg font-bold text-white mb-3 group-hover:text-white transition-colors">
-                  {feature.title}
-                </h3>
-                <p className="text-sm text-slate-400 leading-relaxed mb-5">
-                  {feature.description}
-                </p>
+                <h3 className="text-lg font-bold text-white mb-3">{feature.title}</h3>
+                <p className="text-sm text-slate-400 leading-relaxed mb-5">{feature.description}</p>
 
                 {/* Tags */}
                 <div className="flex flex-wrap gap-2">

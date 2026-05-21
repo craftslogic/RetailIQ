@@ -54,12 +54,9 @@ export default function HowItWorksSection() {
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section id="how-it-works" ref={ref} className="relative py-24 overflow-hidden" style={{ background: "#061020" }}>
+    <section id="how-it-works" ref={ref} className="relative py-24 overflow-hidden bg-[#061020]">
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-blue-500/20 to-transparent" />
       <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-blue-500/20 to-transparent" />
-
-      {/* Decorative vertical line */}
-      <div className="absolute left-1/2 top-32 bottom-32 w-px bg-gradient-to-b from-transparent via-blue-500/20 to-transparent hidden lg:block" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
@@ -70,7 +67,9 @@ export default function HowItWorksSection() {
             transition={{ duration: 0.5 }}
             className="inline-flex mb-4"
           >
-            <span className="section-label">The Process</span>
+            <span className="inline-flex items-center gap-2 bg-blue-500/10 border border-blue-500/25 text-blue-400 px-3.5 py-1 rounded-full text-xs font-semibold uppercase tracking-widest">
+              The Process
+            </span>
           </motion.div>
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -78,7 +77,10 @@ export default function HowItWorksSection() {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4"
           >
-            How <span className="text-gradient-primary">Spotlix Works</span>
+            How{" "}
+            <span className="bg-gradient-to-r from-blue-500 to-cyan-400 bg-clip-text text-transparent">
+              Spotlix Works
+            </span>
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -98,7 +100,7 @@ export default function HowItWorksSection() {
               initial={{ opacity: 0, y: 40 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: i * 0.1 }}
-              className="relative glass-card rounded-2xl p-6 group glass-card-hover overflow-hidden"
+              className="relative bg-white/[0.03] border border-white/[0.08] rounded-2xl p-6 group hover:bg-white/[0.055] hover:border-blue-500/35 hover:-translate-y-1 transition-all duration-300 overflow-hidden"
             >
               {/* Step number background */}
               <div
@@ -117,10 +119,7 @@ export default function HowItWorksSection() {
                   >
                     <step.icon className="w-5 h-5" style={{ color: step.color }} />
                   </div>
-                  <span
-                    className="text-xs font-bold tracking-wider"
-                    style={{ color: step.color }}
-                  >
+                  <span className="text-xs font-bold tracking-wider" style={{ color: step.color }}>
                     STEP {step.num}
                   </span>
                 </div>
@@ -150,7 +149,7 @@ export default function HowItWorksSection() {
               const el = document.getElementById("contact");
               if (el) el.scrollIntoView({ behavior: "smooth" });
             }}
-            className="btn-primary"
+            className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-white font-semibold px-7 py-3 rounded-xl shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 hover:-translate-y-0.5 transition-all duration-300"
           >
             Start Your Analysis Today
           </button>

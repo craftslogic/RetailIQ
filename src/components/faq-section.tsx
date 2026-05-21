@@ -47,13 +47,15 @@ const faqs = [
   },
 ];
 
-function FAQItem({ faq, index }: { faq: { q: string; a: string }; index: number }) {
+function FAQItem({ faq }: { faq: { q: string; a: string } }) {
   const [open, setOpen] = useState(false);
 
   return (
     <div
-      className={`glass-card rounded-xl overflow-hidden transition-all duration-300 ${
-        open ? "glow-border-accent" : ""
+      className={`bg-white/[0.03] border rounded-xl overflow-hidden transition-all duration-300 ${
+        open
+          ? "border-cyan-500/30 shadow-[0_0_0_1px_rgba(6,182,212,0.28),0_0_30px_rgba(6,182,212,0.10)]"
+          : "border-white/[0.08]"
       }`}
     >
       <button
@@ -91,7 +93,7 @@ export default function FAQSection() {
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section id="faq" ref={ref} className="relative py-24 overflow-hidden" style={{ background: "#07111F" }}>
+    <section id="faq" ref={ref} className="relative py-24 overflow-hidden bg-[#07111F]">
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/5 to-transparent" />
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -103,7 +105,9 @@ export default function FAQSection() {
             transition={{ duration: 0.5 }}
             className="inline-flex mb-4"
           >
-            <span className="section-label">FAQ</span>
+            <span className="inline-flex items-center gap-2 bg-blue-500/10 border border-blue-500/25 text-blue-400 px-3.5 py-1 rounded-full text-xs font-semibold uppercase tracking-widest">
+              FAQ
+            </span>
           </motion.div>
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -111,7 +115,11 @@ export default function FAQSection() {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="text-3xl sm:text-4xl font-bold text-white mb-4"
           >
-            Common <span className="text-gradient-primary">Questions</span> Answered
+            Common{" "}
+            <span className="bg-gradient-to-r from-blue-500 to-cyan-400 bg-clip-text text-transparent">
+              Questions
+            </span>{" "}
+            Answered
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -131,7 +139,7 @@ export default function FAQSection() {
           className="space-y-3"
         >
           {faqs.map((faq, i) => (
-            <FAQItem key={i} faq={faq} index={i} />
+            <FAQItem key={i} faq={faq} />
           ))}
         </motion.div>
 
@@ -140,7 +148,7 @@ export default function FAQSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, delay: 0.5 }}
-          className="mt-12 text-center glass-card rounded-2xl p-8"
+          className="mt-12 text-center bg-white/[0.03] border border-white/[0.08] rounded-2xl p-8"
         >
           <p className="text-white font-semibold mb-2">Still have questions?</p>
           <p className="text-slate-400 text-sm mb-6">Our team is ready to help you make the right intelligence decision.</p>
@@ -149,7 +157,7 @@ export default function FAQSection() {
               const el = document.getElementById("contact");
               if (el) el.scrollIntoView({ behavior: "smooth" });
             }}
-            className="btn-primary"
+            className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-white font-semibold px-7 py-3 rounded-xl shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 hover:-translate-y-0.5 transition-all duration-300"
           >
             Contact Our Team
           </button>

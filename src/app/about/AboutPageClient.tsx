@@ -38,7 +38,7 @@ function SectionHeader({ label, title, sub, inView }: { label: string; title: Re
   return (
     <div className="text-center mb-14">
       <motion.div initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5 }} className="inline-flex mb-4">
-        <span className="section-label">{label}</span>
+        <span className="inline-flex items-center gap-2 bg-blue-500/10 border border-blue-500/25 text-blue-400 px-3.5 py-1 rounded-full text-xs font-semibold uppercase tracking-widest">{label}</span>
       </motion.div>
       <motion.h2 initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5, delay: 0.1 }} className="text-3xl sm:text-4xl font-bold text-white mb-4">
         {title}
@@ -71,26 +71,26 @@ export default function AboutPageClient() {
       <main>
         {/* Hero */}
         <section ref={heroRef} className="relative pt-36 pb-24 overflow-hidden" style={{ background: "linear-gradient(135deg, #05101D, #07111F, #091522)" }}>
-          <div className="absolute inset-0 map-grid opacity-40" />
+          <div className="absolute inset-0 opacity-40" style={{ backgroundImage: "linear-gradient(rgba(37,99,235,0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(37,99,235,0.07) 1px, transparent 1px)", backgroundSize: "40px 40px" }} />
           <div className="absolute top-1/3 left-1/4 w-80 h-80 bg-blue-600/10 rounded-full blur-3xl" />
-          <div className="absolute bottom-1/3 right-1/4 w-64 h-64 bg-cyan-600/8 rounded-full blur-3xl" />
+          <div className="absolute bottom-1/3 right-1/4 w-64 h-64 bg-cyan-600/[0.08] rounded-full blur-3xl" />
 
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
             <motion.div initial={{ opacity: 0, y: 20 }} animate={heroInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5 }} className="inline-flex mb-6">
-              <span className="section-label">About Spotlix</span>
+              <span className="inline-flex items-center gap-2 bg-blue-500/10 border border-blue-500/25 text-blue-400 px-3.5 py-1 rounded-full text-xs font-semibold uppercase tracking-widest">About Spotlix</span>
             </motion.div>
             <motion.h1 initial={{ opacity: 0, y: 30 }} animate={heroInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, delay: 0.1 }} className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
               Intelligence Built for{" "}
-              <span className="text-gradient-primary">Physical Businesses</span>
+              <span className="bg-gradient-to-r from-blue-500 to-cyan-400 bg-clip-text text-transparent">Physical Businesses</span>
             </motion.h1>
             <motion.p initial={{ opacity: 0, y: 20 }} animate={heroInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, delay: 0.2 }} className="text-slate-400 text-lg leading-relaxed mb-8 max-w-2xl mx-auto">
               Spotlix was built to help entrepreneurs and physical businesses make smarter launch and expansion decisions through modern market intelligence, strategic analysis, and data-driven frameworks.
             </motion.p>
             <motion.div initial={{ opacity: 0, y: 20 }} animate={heroInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5, delay: 0.3 }} className="flex flex-wrap justify-center gap-4">
-              <Link href="/pricing" className="btn-primary gap-2">
+              <Link href="/pricing" className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-white font-semibold px-7 py-3 rounded-xl shadow-lg shadow-blue-500/30 hover:-translate-y-0.5 transition-all duration-300">
                 Explore Plans <ArrowRight className="w-4 h-4" />
               </Link>
-              <a href="#contact" onClick={(e) => { e.preventDefault(); document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" }); }} className="btn-secondary">
+              <a href="#contact" onClick={(e) => { e.preventDefault(); document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" }); }} className="inline-flex items-center gap-2 bg-white/5 hover:bg-white/10 border border-white/12 hover:border-blue-500/45 text-white font-medium px-7 py-3 rounded-xl hover:-translate-y-0.5 transition-all duration-300">
                 Book a Consultation
               </a>
             </motion.div>
@@ -104,9 +104,9 @@ export default function AboutPageClient() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid lg:grid-cols-2 gap-16 items-center">
               <motion.div initial={{ opacity: 0, x: -30 }} animate={storyInView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.6 }}>
-                <span className="section-label mb-6 inline-flex">Our Story</span>
+                <span className="inline-flex items-center gap-2 bg-blue-500/10 border border-blue-500/25 text-blue-400 px-3.5 py-1 rounded-full text-xs font-semibold uppercase tracking-widest mb-6">Our Story</span>
                 <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6 mt-4">
-                  Why We Built <span className="text-gradient-primary">Spotlix</span>
+                  Why We Built <span className="bg-gradient-to-r from-blue-500 to-cyan-400 bg-clip-text text-transparent">Spotlix</span>
                 </h2>
                 <p className="text-slate-400 leading-relaxed mb-5">
                   We saw too many great entrepreneurs launch physical businesses in the wrong places — not because their ideas were bad, but because they lacked the right market intelligence before launch.
@@ -128,13 +128,13 @@ export default function AboutPageClient() {
               </motion.div>
 
               <motion.div initial={{ opacity: 0, x: 30 }} animate={storyInView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.6, delay: 0.2 }}>
-                <div className="glass-card rounded-2xl p-8 glow-border-primary">
+                <div className="bg-white/[0.03] border border-white/[0.08] backdrop-blur-md rounded-2xl p-8" style={{ boxShadow: "0 0 0 1px rgba(37,99,235,0.28), 0 0 30px rgba(37,99,235,0.10)" }}>
                   <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-transparent rounded-2xl" />
                   <div className="relative space-y-6">
                     <div className="pb-6 border-b border-white/5">
                       <p className="text-xs font-bold uppercase tracking-widest text-blue-400 mb-3">Our Mission</p>
                       <p className="text-white font-medium leading-relaxed">
-                        "Eliminate guesswork from physical business launch decisions through systematic market intelligence and strategic analysis."
+                        &quot;Eliminate guesswork from physical business launch decisions through systematic market intelligence and strategic analysis.&quot;
                       </p>
                     </div>
                     <div className="pb-6 border-b border-white/5">
@@ -161,13 +161,13 @@ export default function AboutPageClient() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <SectionHeader
               label="Core Principles"
-              title={<>What We <span className="text-gradient-primary">Stand For</span></>}
+              title={<>What We <span className="bg-gradient-to-r from-blue-500 to-cyan-400 bg-clip-text text-transparent">Stand For</span></>}
               sub="The values that shape every analysis, recommendation, and client relationship at Spotlix."
               inView={valuesInView}
             />
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {values.map((v, i) => (
-                <motion.div key={v.title} initial={{ opacity: 0, y: 30 }} animate={valuesInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5, delay: i * 0.08 }} className="glass-card rounded-2xl p-6 glass-card-hover group">
+                <motion.div key={v.title} initial={{ opacity: 0, y: 30 }} animate={valuesInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5, delay: i * 0.08 }} className="bg-white/[0.03] border border-white/[0.08] rounded-2xl p-6 hover:bg-white/[0.055] hover:border-blue-500/38 hover:-translate-y-1 transition-all duration-300 group">
                   <div className="w-11 h-11 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300" style={{ background: `${v.color}18`, border: `1px solid ${v.color}30` }}>
                     <v.icon className="w-5 h-5" style={{ color: v.color }} />
                   </div>
@@ -184,13 +184,13 @@ export default function AboutPageClient() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <SectionHeader
               label="Our Approach"
-              title={<>The Spotlix <span className="text-gradient-primary">Intelligence Process</span></>}
+              title={<>The Spotlix <span className="bg-gradient-to-r from-blue-500 to-cyan-400 bg-clip-text text-transparent">Intelligence Process</span></>}
               sub="A systematic, repeatable framework that delivers consistent, high-quality intelligence for every client."
               inView={processInView}
             />
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {process.map((step, i) => (
-                <motion.div key={step.num} initial={{ opacity: 0, y: 30 }} animate={processInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5, delay: i * 0.1 }} className="relative glass-card rounded-2xl p-6 glass-card-hover group overflow-hidden">
+                <motion.div key={step.num} initial={{ opacity: 0, y: 30 }} animate={processInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5, delay: i * 0.1 }} className="relative bg-white/[0.03] border border-white/[0.08] rounded-2xl p-6 hover:bg-white/[0.055] hover:border-blue-500/38 hover:-translate-y-1 transition-all duration-300 group overflow-hidden">
                   <div className="absolute -top-3 -right-3 text-7xl font-black opacity-5 text-blue-400 select-none">{step.num}</div>
                   <div className="relative z-10">
                     <span className="text-xs font-bold text-blue-400 tracking-wider mb-4 block">STEP {step.num}</span>
@@ -208,7 +208,7 @@ export default function AboutPageClient() {
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
             <SectionHeader
               label="Company Timeline"
-              title={<>The Spotlix <span className="text-gradient-primary">Journey</span></>}
+              title={<>The Spotlix <span className="bg-gradient-to-r from-blue-500 to-cyan-400 bg-clip-text text-transparent">Journey</span></>}
               inView={timelineInView}
             />
             <div className="relative">
@@ -219,7 +219,7 @@ export default function AboutPageClient() {
                     <div className="w-12 h-12 rounded-xl bg-blue-500/15 border border-blue-500/30 flex items-center justify-center flex-shrink-0 relative z-10">
                       <span className="text-xs font-bold text-blue-400">{item.year.slice(2)}</span>
                     </div>
-                    <div className="glass-card rounded-xl p-4 flex-1">
+                    <div className="bg-white/[0.03] border border-white/[0.08] rounded-xl p-4 flex-1">
                       <div className="flex items-center gap-3 mb-2">
                         <span className="text-xs text-blue-400 font-semibold">{item.year}</span>
                         <span className="text-sm font-bold text-white">{item.event}</span>
@@ -236,18 +236,18 @@ export default function AboutPageClient() {
         {/* CTA Section */}
         <section className="py-20" style={{ background: "#07111F" }}>
           <div className="max-w-3xl mx-auto px-4 text-center">
-            <div className="glass-card rounded-2xl p-12 glow-border-primary relative overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/8 to-cyan-500/5 rounded-2xl" />
+            <div className="bg-white/[0.03] border border-white/[0.08] rounded-2xl p-12 relative overflow-hidden" style={{ boxShadow: "0 0 0 1px rgba(37,99,235,0.28), 0 0 30px rgba(37,99,235,0.10)" }}>
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/[0.08] to-cyan-500/[0.05] rounded-2xl" />
               <div className="relative z-10">
                 <h2 className="text-3xl font-bold text-white mb-4">Ready to Launch Smarter?</h2>
                 <p className="text-slate-400 mb-8">
                   Get the intelligence you need to make confident location and expansion decisions.
                 </p>
                 <div className="flex flex-wrap justify-center gap-4">
-                  <Link href="/pricing" className="btn-primary gap-2">
+                  <Link href="/pricing" className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-white font-semibold px-7 py-3 rounded-xl shadow-lg shadow-blue-500/30 hover:-translate-y-0.5 transition-all duration-300">
                     View Intelligence Plans <ArrowRight className="w-4 h-4" />
                   </Link>
-                  <a href="/#contact" onClick={(e) => { e.preventDefault(); document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" }); }} className="btn-secondary">
+                  <a href="/#contact" onClick={(e) => { e.preventDefault(); document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" }); }} className="inline-flex items-center gap-2 bg-white/5 hover:bg-white/10 border border-white/12 hover:border-blue-500/45 text-white font-medium px-7 py-3 rounded-xl hover:-translate-y-0.5 transition-all duration-300">
                     Book a Call
                   </a>
                 </div>

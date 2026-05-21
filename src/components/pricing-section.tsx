@@ -124,23 +124,9 @@ function PricingCard({ plan, index, inView }: { plan: typeof plans[0]; index: nu
       initial={{ opacity: 0, y: 30 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.5, delay: index * 0.1 }}
-      className={`relative glass-card rounded-2xl p-6 flex flex-col group glass-card-hover overflow-hidden ${
-        plan.recommended ? "glow-border-primary" : ""
-      }`}
-      style={plan.recommended ? { border: `1px solid ${plan.color}40` } : {}}
+      className="relative bg-white/[0.03] border border-white/[0.08] rounded-2xl p-6 flex flex-col group hover:bg-white/[0.055] hover:-translate-y-1 transition-all duration-300 overflow-hidden"
+      style={plan.recommended ? { border: `1px solid ${plan.color}40`, boxShadow: `0 0 0 1px ${plan.color}28, 0 0 30px ${plan.color}10` } : {}}
     >
-      {/* Glow bg */}
-      <div
-        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl"
-        style={{ background: `radial-gradient(circle at 50% 0%, ${plan.color}10, transparent 70%)` }}
-      />
-      {plan.recommended && (
-        <div
-          className="absolute inset-0 opacity-30 rounded-2xl"
-          style={{ background: `radial-gradient(circle at 50% 0%, ${plan.color}12, transparent 70%)` }}
-        />
-      )}
-
       {/* Badge */}
       {plan.badge && (
         <div
@@ -159,7 +145,7 @@ function PricingCard({ plan, index, inView }: { plan: typeof plans[0]; index: nu
             className="w-10 h-10 rounded-xl flex items-center justify-center mb-3"
             style={{ background: `${plan.color}18`, border: `1px solid ${plan.color}25` }}
           >
-            <Zap className="w-4.5 h-4.5" style={{ color: plan.color }} />
+            <Zap className="w-4 h-4" style={{ color: plan.color }} />
           </div>
           <h3 className="text-base font-bold text-white">{plan.name}</h3>
         </div>
@@ -227,12 +213,8 @@ export default function PricingSection() {
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section id="pricing" ref={ref} className="relative py-24 overflow-hidden" style={{ background: "#07111F" }}>
+    <section id="pricing" ref={ref} className="relative py-24 overflow-hidden bg-[#07111F]">
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/5 to-transparent" />
-
-      {/* BG accents */}
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-600/5 rounded-full blur-3xl" />
-      <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-violet-600/5 rounded-full blur-3xl" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
@@ -243,7 +225,9 @@ export default function PricingSection() {
             transition={{ duration: 0.5 }}
             className="inline-flex mb-4"
           >
-            <span className="section-label">Transparent Pricing</span>
+            <span className="inline-flex items-center gap-2 bg-blue-500/10 border border-blue-500/25 text-blue-400 px-3.5 py-1 rounded-full text-xs font-semibold uppercase tracking-widest">
+              Transparent Pricing
+            </span>
           </motion.div>
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -252,7 +236,9 @@ export default function PricingSection() {
             className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4"
           >
             Intelligence That Fits{" "}
-            <span className="text-gradient-primary">Your Budget</span>
+            <span className="bg-gradient-to-r from-blue-500 to-cyan-400 bg-clip-text text-transparent">
+              Your Budget
+            </span>
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -279,7 +265,8 @@ export default function PricingSection() {
           transition={{ duration: 0.5, delay: 0.7 }}
           className="text-center mt-12 text-sm text-slate-500"
         >
-          All plans are fully customizable. <span className="text-blue-400">Contact us</span> for enterprise agreements and custom scopes.
+          All plans are fully customizable.{" "}
+          <span className="text-blue-400">Contact us</span> for enterprise agreements and custom scopes.
         </motion.div>
       </div>
     </section>

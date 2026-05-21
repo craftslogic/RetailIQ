@@ -77,6 +77,8 @@ function StarRating({ count }: { count: number }) {
   );
 }
 
+const glassCard = "bg-white/[0.03] border border-white/[0.08] backdrop-blur-md";
+
 export default function TestimonialsSection() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
@@ -86,7 +88,7 @@ export default function TestimonialsSection() {
   const next = () => setActiveIdx((p) => (p + 1) % testimonials.length);
 
   return (
-    <section id="testimonials" ref={ref} className="relative py-24 overflow-hidden" style={{ background: "#061020" }}>
+    <section id="testimonials" ref={ref} className="relative py-24 overflow-hidden bg-[#061020]">
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-blue-500/20 to-transparent" />
       <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-blue-500/20 to-transparent" />
 
@@ -99,7 +101,9 @@ export default function TestimonialsSection() {
             transition={{ duration: 0.5 }}
             className="inline-flex mb-4"
           >
-            <span className="section-label">Client Stories</span>
+            <span className="inline-flex items-center gap-2 bg-blue-500/10 border border-blue-500/25 text-blue-400 px-3.5 py-1 rounded-full text-xs font-semibold uppercase tracking-widest">
+              Client Stories
+            </span>
           </motion.div>
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -108,7 +112,9 @@ export default function TestimonialsSection() {
             className="text-3xl sm:text-4xl font-bold text-white mb-4"
           >
             Businesses That{" "}
-            <span className="text-gradient-primary">Launched Smarter</span>
+            <span className="bg-gradient-to-r from-blue-500 to-cyan-400 bg-clip-text text-transparent">
+              Launched Smarter
+            </span>
           </motion.h2>
         </div>
 
@@ -120,18 +126,11 @@ export default function TestimonialsSection() {
               initial={{ opacity: 0, y: 30 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="glass-card rounded-2xl p-6 glass-card-hover flex flex-col gap-4 group"
+              className={`${glassCard} rounded-2xl p-6 hover:bg-white/[0.055] hover:-translate-y-1 transition-all duration-300 flex flex-col gap-4`}
             >
-              {/* Quote icon */}
               <Quote className="w-6 h-6 text-blue-500/50" />
-
-              {/* Rating */}
               <StarRating count={t.rating} />
-
-              {/* Text */}
               <p className="text-slate-300 text-sm leading-relaxed flex-1">&ldquo;{t.quote}&rdquo;</p>
-
-              {/* Author */}
               <div className="flex items-center gap-3 pt-4 border-t border-white/5">
                 <div
                   className="w-9 h-9 rounded-xl flex items-center justify-center text-xs font-bold text-white flex-shrink-0"
@@ -163,7 +162,7 @@ export default function TestimonialsSection() {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -40 }}
               transition={{ duration: 0.3 }}
-              className="glass-card rounded-2xl p-6 flex flex-col gap-4"
+              className={`${glassCard} rounded-2xl p-6 flex flex-col gap-4`}
             >
               <Quote className="w-6 h-6 text-blue-500/50" />
               <StarRating count={testimonials[activeIdx].rating} />
@@ -184,7 +183,7 @@ export default function TestimonialsSection() {
           </AnimatePresence>
 
           <div className="flex items-center justify-center gap-4 mt-6">
-            <button onClick={prev} className="p-2 rounded-full glass-card hover:bg-white/10 transition-all">
+            <button onClick={prev} className={`p-2 rounded-full ${glassCard} hover:bg-white/10 transition-all`}>
               <ChevronLeft className="w-5 h-5 text-slate-300" />
             </button>
             <div className="flex gap-1.5">
@@ -197,7 +196,7 @@ export default function TestimonialsSection() {
                 />
               ))}
             </div>
-            <button onClick={next} className="p-2 rounded-full glass-card hover:bg-white/10 transition-all">
+            <button onClick={next} className={`p-2 rounded-full ${glassCard} hover:bg-white/10 transition-all`}>
               <ChevronRight className="w-5 h-5 text-slate-300" />
             </button>
           </div>

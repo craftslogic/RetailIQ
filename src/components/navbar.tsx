@@ -2,8 +2,9 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, ChevronDown, Zap } from "lucide-react";
+import { Menu, X, ChevronDown } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 const navLinks = [
   { label: "Home", href: "/" },
@@ -40,9 +41,7 @@ export default function Navbar() {
     if (href.startsWith("/#")) {
       const id = href.replace("/#", "");
       const el = document.getElementById(id);
-      if (el) {
-        el.scrollIntoView({ behavior: "smooth" });
-      }
+      if (el) el.scrollIntoView({ behavior: "smooth" });
     }
   };
 
@@ -61,16 +60,15 @@ export default function Navbar() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 lg:h-20">
             {/* Logo */}
-            <Link href="/" className="flex items-center gap-2.5 group">
-              <div className="relative">
-                <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-400 flex items-center justify-center shadow-lg shadow-blue-500/30 group-hover:shadow-blue-500/50 transition-all duration-300">
-                  <Zap className="w-5 h-5 text-white" strokeWidth={2.5} />
-                </div>
-                <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-400 blur-md opacity-40 group-hover:opacity-70 transition-opacity duration-300" />
-              </div>
-              <span className="text-xl font-bold text-white tracking-tight">
-                SPOT<span className="text-gradient-primary">LIX</span>
-              </span>
+            <Link href="/" className="flex items-center group">
+              <Image 
+                src="/logo.png" 
+                alt="Spotlix" 
+                width={150} 
+                height={40} 
+                className="h-8 w-auto object-contain" 
+                priority
+              />
             </Link>
 
             {/* Desktop Nav */}
@@ -85,7 +83,10 @@ export default function Navbar() {
                   {link.dropdown ? (
                     <button className="flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all duration-200">
                       {link.label}
-                      <ChevronDown className="w-3.5 h-3.5 transition-transform duration-200" style={{ transform: activeDropdown === link.label ? 'rotate(180deg)' : 'rotate(0deg)' }} />
+                      <ChevronDown
+                        className="w-3.5 h-3.5 transition-transform duration-200"
+                        style={{ transform: activeDropdown === link.label ? "rotate(180deg)" : "rotate(0deg)" }}
+                      />
                     </button>
                   ) : (
                     <Link
@@ -105,7 +106,7 @@ export default function Navbar() {
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: 8, scale: 0.95 }}
                         transition={{ duration: 0.15 }}
-                        className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-56 glass-card rounded-xl p-2 shadow-2xl shadow-black/40"
+                        className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-56 bg-[#07111F]/95 backdrop-blur-xl border border-white/10 rounded-xl p-2 shadow-2xl shadow-black/40"
                       >
                         {link.dropdown.map((item) => (
                           <Link
@@ -136,7 +137,7 @@ export default function Navbar() {
               <Link
                 href="/#contact"
                 onClick={() => handleNavClick("/#contact")}
-                className="btn-primary text-sm px-5 py-2.5"
+                className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-white font-semibold text-sm px-5 py-2.5 rounded-xl shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 hover:-translate-y-0.5 transition-all duration-300"
               >
                 Get Started
               </Link>
@@ -193,14 +194,14 @@ export default function Navbar() {
                 <Link
                   href="/#contact"
                   onClick={() => handleNavClick("/#contact")}
-                  className="btn-secondary text-sm justify-center"
+                  className="inline-flex justify-center items-center gap-2 bg-white/5 hover:bg-white/10 border border-white/12 text-white font-medium text-sm px-7 py-3 rounded-xl transition-all duration-300"
                 >
                   Book a Call
                 </Link>
                 <Link
                   href="/#contact"
                   onClick={() => handleNavClick("/#contact")}
-                  className="btn-primary text-sm justify-center"
+                  className="inline-flex justify-center items-center gap-2 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold text-sm px-7 py-3 rounded-xl shadow-lg shadow-blue-500/30 transition-all duration-300"
                 >
                   Get Started
                 </Link>

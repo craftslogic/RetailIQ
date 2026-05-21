@@ -34,6 +34,8 @@ const budgetRanges = [
   "Prefer not to say",
 ];
 
+const glassCard = "bg-white/[0.03] border border-white/[0.08] backdrop-blur-md";
+
 export default function ContactSection() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
@@ -92,16 +94,14 @@ export default function ContactSection() {
     `w-full px-4 py-3 rounded-xl text-sm text-white placeholder-slate-500 transition-all duration-200 outline-none focus:ring-2 ${
       errors[field]
         ? "ring-1 ring-red-500/50 bg-red-500/5 border border-red-500/20"
-        : "bg-white/4 border border-white/8 focus:border-blue-500/40 focus:ring-blue-500/20 focus:bg-white/6"
+        : "bg-white/[0.04] border border-white/[0.08] focus:border-blue-500/40 focus:ring-blue-500/20 focus:bg-white/[0.06]"
     }`;
 
   return (
-    <section id="contact" ref={ref} className="relative py-24 overflow-hidden" style={{ background: "#061020" }}>
+    <section id="contact" ref={ref} className="relative py-24 overflow-hidden bg-[#061020]">
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-blue-500/20 to-transparent" />
-
-      {/* BG */}
-      <div className="absolute top-1/4 right-0 w-96 h-96 bg-blue-600/6 rounded-full blur-3xl" />
-      <div className="absolute bottom-1/4 left-0 w-80 h-80 bg-cyan-600/5 rounded-full blur-3xl" />
+      <div className="absolute top-1/4 right-0 w-96 h-96 bg-blue-600/[0.06] rounded-full blur-3xl" />
+      <div className="absolute bottom-1/4 left-0 w-80 h-80 bg-cyan-600/[0.05] rounded-full blur-3xl" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-16 items-start">
@@ -113,7 +113,9 @@ export default function ContactSection() {
               transition={{ duration: 0.5 }}
               className="inline-flex mb-6"
             >
-              <span className="section-label">Get Started</span>
+              <span className="inline-flex items-center gap-2 bg-blue-500/10 border border-blue-500/25 text-blue-400 px-3.5 py-1 rounded-full text-xs font-semibold uppercase tracking-widest">
+                Get Started
+              </span>
             </motion.div>
 
             <motion.h2
@@ -123,7 +125,9 @@ export default function ContactSection() {
               className="text-3xl sm:text-4xl font-bold text-white mb-5"
             >
               Start Your{" "}
-              <span className="text-gradient-primary">Intelligence Analysis</span>
+              <span className="bg-gradient-to-r from-blue-500 to-cyan-400 bg-clip-text text-transparent">
+                Intelligence Analysis
+              </span>
             </motion.h2>
 
             <motion.p
@@ -165,7 +169,7 @@ export default function ContactSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.4 }}
-              className="glass-card rounded-xl p-4"
+              className={`${glassCard} rounded-xl p-4`}
             >
               <p className="text-xs text-slate-400 leading-relaxed">
                 🔒 <span className="text-white font-medium">100% Confidential.</span>{" "}
@@ -180,7 +184,10 @@ export default function ContactSection() {
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <div className="glass-card rounded-2xl p-6 sm:p-8 glow-border-primary">
+            <div
+              className={`${glassCard} rounded-2xl p-6 sm:p-8`}
+              style={{ boxShadow: "0 0 0 1px rgba(37,99,235,0.28), 0 0 30px rgba(37,99,235,0.10)" }}
+            >
               {/* Success state */}
               {status === "success" ? (
                 <div className="text-center py-10">
@@ -191,7 +198,10 @@ export default function ContactSection() {
                   <p className="text-slate-400 text-sm mb-6">
                     Our team will review your business details and reach out within 24 business hours.
                   </p>
-                  <button onClick={() => setStatus("idle")} className="btn-secondary text-sm">
+                  <button
+                    onClick={() => setStatus("idle")}
+                    className="inline-flex items-center gap-2 bg-white/5 hover:bg-white/10 border border-white/12 text-white font-medium text-sm px-7 py-3 rounded-xl transition-all duration-300"
+                  >
                     Submit Another Request
                   </button>
                 </div>
@@ -298,7 +308,7 @@ export default function ContactSection() {
                   <button
                     type="submit"
                     disabled={status === "loading"}
-                    className="btn-primary w-full justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
+                    className="inline-flex items-center justify-center gap-2 w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-white font-semibold py-3 px-4 rounded-xl shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed"
                   >
                     {status === "loading" ? (
                       <>
@@ -315,7 +325,9 @@ export default function ContactSection() {
 
                   <p className="text-center text-xs text-slate-600">
                     By submitting, you agree to our{" "}
-                    <a href="/privacy-policy" className="text-slate-400 hover:text-white underline">Privacy Policy</a>
+                    <a href="/privacy-policy" className="text-slate-400 hover:text-white underline">
+                      Privacy Policy
+                    </a>
                   </p>
                 </form>
               )}

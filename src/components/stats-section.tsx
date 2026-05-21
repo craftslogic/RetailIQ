@@ -47,8 +47,7 @@ export default function StatsSection() {
   const inView = useInView(ref, { once: true });
 
   return (
-    <section ref={ref} className="relative py-20 overflow-hidden" style={{ background: "#061020" }}>
-      {/* Top border gradient */}
+    <section ref={ref} className="relative py-20 overflow-hidden bg-[#061020]">
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-blue-500/30 to-transparent" />
       <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-blue-500/20 to-transparent" />
 
@@ -57,7 +56,10 @@ export default function StatsSection() {
         <div className="text-center mb-12">
           <p className="text-xs font-semibold uppercase tracking-widest text-blue-400 mb-3">Trusted by Businesses Worldwide</p>
           <h2 className="text-2xl sm:text-3xl font-bold text-white">
-            Intelligence That Drives <span className="text-gradient-primary">Real Results</span>
+            Intelligence That Drives{" "}
+            <span className="bg-gradient-to-r from-blue-500 to-cyan-400 bg-clip-text text-transparent">
+              Real Results
+            </span>
           </h2>
         </div>
 
@@ -65,27 +67,22 @@ export default function StatsSection() {
           {stats.map((stat, i) => (
             <div
               key={stat.label}
-              className="relative glass-card rounded-2xl p-6 text-center group glass-card-hover overflow-hidden"
+              className="relative bg-white/[0.03] border border-white/[0.08] rounded-2xl p-6 text-center group hover:bg-white/[0.055] hover:border-blue-500/30 hover:-translate-y-1 transition-all duration-300 overflow-hidden"
               style={{ animationDelay: `${i * 0.1}s` }}
             >
-              {/* Glow on hover */}
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/0 to-cyan-500/0 group-hover:from-blue-500/5 group-hover:to-cyan-500/5 transition-all duration-500 rounded-2xl" />
-
               <div className="relative z-10">
-                <div className="text-3xl sm:text-4xl font-bold text-white mb-1 text-gradient-primary">
+                <div className="text-3xl sm:text-4xl font-bold mb-1 bg-gradient-to-r from-blue-500 to-cyan-400 bg-clip-text text-transparent">
                   {inView ? <AnimatedCounter end={stat.value} suffix={stat.suffix} /> : "0"}
                 </div>
                 <p className="text-sm font-semibold text-white/80 mb-1">{stat.label}</p>
                 <p className="text-xs text-slate-500">{stat.sub}</p>
               </div>
-
-              {/* Corner accent */}
               <div className="absolute -top-4 -right-4 w-16 h-16 bg-blue-500/10 rounded-full blur-xl" />
             </div>
           ))}
         </div>
 
-        {/* Trusted by logos row (placeholder brands) */}
+        {/* Trusted by logos row */}
         <div className="mt-16 text-center">
           <p className="text-xs text-slate-500 uppercase tracking-widest mb-6">Trusted by growing businesses</p>
           <div className="flex flex-wrap justify-center items-center gap-8 opacity-30">

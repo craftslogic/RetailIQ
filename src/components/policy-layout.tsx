@@ -16,12 +16,24 @@ export function PolicyLayout({ title, effectiveDate, children }: PolicyLayoutPro
       <Navbar />
       <main>
         {/* Hero */}
-        <section className="relative pt-36 pb-16 overflow-hidden" style={{ background: "linear-gradient(135deg, #05101D, #07111F)" }}>
-          <div className="absolute inset-0 map-grid opacity-30" />
+        <section
+          className="relative pt-36 pb-16 overflow-hidden"
+          style={{ background: "linear-gradient(135deg, #05101D, #07111F)" }}
+        >
+          <div
+            className="absolute inset-0 opacity-30"
+            style={{
+              backgroundImage:
+                "linear-gradient(rgba(37,99,235,0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(37,99,235,0.07) 1px, transparent 1px)",
+              backgroundSize: "40px 40px",
+            }}
+          />
           <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-[#07111F] to-transparent" />
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="inline-flex mb-4">
-              <span className="section-label">Legal</span>
+              <span className="inline-flex items-center gap-2 bg-blue-500/10 border border-blue-500/25 text-blue-400 px-3.5 py-1 rounded-full text-xs font-semibold uppercase tracking-widest">
+                Legal
+              </span>
             </div>
             <h1 className="text-3xl sm:text-4xl font-bold text-white mt-4 mb-3">{title}</h1>
             {effectiveDate && (
@@ -31,14 +43,14 @@ export function PolicyLayout({ title, effectiveDate, children }: PolicyLayoutPro
         </section>
 
         {/* Content */}
-        <section className="py-16" style={{ background: "#07111F" }}>
+        <section className="py-16 bg-[#07111F]">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="glass-card rounded-2xl p-8 sm:p-12">
-              <div className="prose-spotlix">{children}</div>
+            <div className="bg-white/[0.03] border border-white/[0.08] rounded-2xl p-8 sm:p-12">
+              <div className="text-slate-400 text-sm leading-[1.85]">{children}</div>
             </div>
 
             {/* Legal nav */}
-            <div className="mt-10 glass-card rounded-xl p-6">
+            <div className="mt-10 bg-white/[0.03] border border-white/[0.08] rounded-xl p-6">
               <p className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-4">Other Legal Pages</p>
               <div className="flex flex-wrap gap-3">
                 {[
@@ -48,7 +60,11 @@ export function PolicyLayout({ title, effectiveDate, children }: PolicyLayoutPro
                   { label: "Cookie Policy", href: "/cookie-policy" },
                   { label: "Disclaimer", href: "/disclaimer" },
                 ].map((l) => (
-                  <Link key={l.label} href={l.href} className="text-xs text-slate-400 hover:text-white transition-colors px-3 py-1.5 rounded-lg bg-white/3 hover:bg-white/6 border border-white/5">
+                  <Link
+                    key={l.label}
+                    href={l.href}
+                    className="text-xs text-slate-400 hover:text-white transition-colors px-3 py-1.5 rounded-lg bg-white/[0.03] hover:bg-white/[0.06] border border-white/5"
+                  >
                     {l.label}
                   </Link>
                 ))}
@@ -62,7 +78,6 @@ export function PolicyLayout({ title, effectiveDate, children }: PolicyLayoutPro
   );
 }
 
-// Prose component helpers
 export function PolicySection({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div className="mb-8">

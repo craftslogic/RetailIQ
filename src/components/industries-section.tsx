@@ -22,7 +22,7 @@ export default function IndustriesSection() {
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section id="industries" ref={ref} className="relative py-24 overflow-hidden" style={{ background: "#061020" }}>
+    <section id="industries" ref={ref} className="relative py-24 overflow-hidden bg-[#061020]">
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-blue-500/20 to-transparent" />
       <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-blue-500/20 to-transparent" />
 
@@ -35,7 +35,9 @@ export default function IndustriesSection() {
             transition={{ duration: 0.5 }}
             className="inline-flex mb-4"
           >
-            <span className="section-label">Industries We Serve</span>
+            <span className="inline-flex items-center gap-2 bg-blue-500/10 border border-blue-500/25 text-blue-400 px-3.5 py-1 rounded-full text-xs font-semibold uppercase tracking-widest">
+              Industries We Serve
+            </span>
           </motion.div>
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -43,7 +45,10 @@ export default function IndustriesSection() {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="text-3xl sm:text-4xl font-bold text-white mb-4"
           >
-            Built for <span className="text-gradient-primary">Every Physical Business</span>
+            Built for{" "}
+            <span className="bg-gradient-to-r from-blue-500 to-cyan-400 bg-clip-text text-transparent">
+              Every Physical Business
+            </span>
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -64,7 +69,7 @@ export default function IndustriesSection() {
               initial={{ opacity: 0, y: 20, scale: 0.95 }}
               animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}
               transition={{ duration: 0.4, delay: i * 0.06 }}
-              className="glass-card rounded-xl p-5 text-center group glass-card-hover flex flex-col items-center gap-3 cursor-default"
+              className="bg-white/[0.03] border border-white/[0.08] rounded-xl p-5 text-center group hover:bg-white/[0.055] hover:border-blue-500/35 hover:-translate-y-1 transition-all duration-300 flex flex-col items-center gap-3 cursor-default"
             >
               <div
                 className="w-12 h-12 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300"

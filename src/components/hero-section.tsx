@@ -30,18 +30,19 @@ export default function HeroSection() {
       className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20"
       style={{ background: "linear-gradient(135deg, #05101D 0%, #07111F 50%, #091522 100%)" }}
     >
-      {/* Animated background grid */}
-      <div className="absolute inset-0 map-grid opacity-60" />
+      {/* Background grid */}
+      <div
+        className="absolute inset-0 opacity-60"
+        style={{
+          backgroundImage:
+            "linear-gradient(rgba(37,99,235,0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(37,99,235,0.07) 1px, transparent 1px)",
+          backgroundSize: "40px 40px",
+        }}
+      />
 
       {/* Glowing orbs */}
       <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl animate-pulse" />
-      <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-cyan-500/8 rounded-full blur-3xl animate-pulse" style={{ animationDelay: "1s" }} />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-500/4 rounded-full blur-3xl" />
-
-      {/* Scan line */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute left-0 right-0 h-px bg-gradient-to-r from-transparent via-blue-500/30 to-transparent" style={{ animation: "scan-line 6s linear infinite" }} />
-      </div>
+      <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-cyan-500/[0.08] rounded-full blur-3xl animate-pulse" style={{ animationDelay: "1s" }} />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
@@ -54,7 +55,7 @@ export default function HeroSection() {
               transition={{ duration: 0.5 }}
               className="inline-flex items-center gap-2 mb-6"
             >
-              <span className="section-label">
+              <span className="inline-flex items-center gap-2 bg-blue-500/10 border border-blue-500/25 text-blue-400 px-3.5 py-1 rounded-full text-xs font-semibold uppercase tracking-widest">
                 <Sparkles className="w-3.5 h-3.5" />
                 Physical Business Intelligence Platform
               </span>
@@ -68,7 +69,9 @@ export default function HeroSection() {
               className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-[1.1] tracking-tight mb-6"
             >
               Launch Your Business{" "}
-              <span className="text-gradient-primary">in the Right</span>{" "}
+              <span className="bg-gradient-to-r from-blue-500 to-cyan-400 bg-clip-text text-transparent">
+                in the Right
+              </span>{" "}
               Location
             </motion.h1>
 
@@ -90,11 +93,17 @@ export default function HeroSection() {
               transition={{ duration: 0.6, delay: 0.3 }}
               className="flex flex-wrap gap-4 mb-10"
             >
-              <button onClick={scrollToContact} className="btn-primary gap-2">
+              <button
+                onClick={scrollToContact}
+                className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-white font-semibold px-7 py-3 rounded-xl shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 hover:-translate-y-0.5 transition-all duration-300"
+              >
                 Start Your Analysis
                 <ArrowRight className="w-4 h-4" />
               </button>
-              <button onClick={scrollToFeatures} className="btn-secondary gap-2">
+              <button
+                onClick={scrollToFeatures}
+                className="inline-flex items-center gap-2 bg-white/5 hover:bg-white/10 border border-white/12 hover:border-blue-500/45 text-white font-medium px-7 py-3 rounded-xl hover:-translate-y-0.5 transition-all duration-300"
+              >
                 <Play className="w-4 h-4" />
                 See How It Works
               </button>
@@ -128,7 +137,8 @@ export default function HeroSection() {
             className="relative"
           >
             {/* Main dashboard card */}
-            <div className="relative glass-card rounded-2xl p-6 glow-border-primary animate-float">
+            <div className="relative bg-white/[0.03] border border-white/[0.08] backdrop-blur-md rounded-2xl p-6 shadow-2xl shadow-blue-500/10 animate-[float_4s_ease-in-out_infinite]"
+              style={{ boxShadow: "0 0 0 1px rgba(37,99,235,0.28), 0 0 30px rgba(37,99,235,0.10)" }}>
               {/* Dashboard header */}
               <div className="flex items-center justify-between mb-6">
                 <div>
@@ -141,15 +151,19 @@ export default function HeroSection() {
               </div>
 
               {/* Map visual */}
-              <div className="relative h-44 rounded-xl overflow-hidden mb-4 dot-grid bg-[#0a1628]">
-                {/* Grid overlay */}
-                <div className="absolute inset-0 map-grid opacity-50" />
-
-                {/* Location pins */}
+              <div
+                className="relative h-44 rounded-xl overflow-hidden mb-4 bg-[#0a1628]"
+                style={{
+                  backgroundImage:
+                    "radial-gradient(rgba(37,99,235,0.2) 1px, transparent 1px), linear-gradient(rgba(37,99,235,0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(37,99,235,0.07) 1px, transparent 1px)",
+                  backgroundSize: "24px 24px, 40px 40px, 40px 40px",
+                }}
+              >
+                {/* Centre pin */}
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
                   <div className="relative">
-                    <div className="w-4 h-4 bg-blue-500 rounded-full border-2 border-white shadow-lg shadow-blue-500/50 animate-marker-bounce" />
-                    <div className="absolute inset-0 rounded-full bg-blue-500 animate-ping-slow opacity-40" />
+                    <div className="w-4 h-4 bg-blue-500 rounded-full border-2 border-white shadow-lg shadow-blue-500/50 animate-bounce" />
+                    <div className="absolute inset-0 rounded-full bg-blue-500 animate-ping opacity-40" />
                   </div>
                 </div>
                 <div className="absolute top-1/3 left-1/3">
@@ -158,26 +172,6 @@ export default function HeroSection() {
                 <div className="absolute bottom-1/3 right-1/4">
                   <div className="w-3 h-3 bg-red-400 rounded-full border border-white/50" />
                 </div>
-                <div className="absolute top-1/4 right-1/3">
-                  <div className="w-2.5 h-2.5 bg-green-400 rounded-full border border-white/50" />
-                </div>
-
-                {/* Radar sweep */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-                  <div className="w-32 h-32 border border-blue-500/20 rounded-full" />
-                  <div className="absolute inset-0 w-32 h-32 border border-blue-500/10 rounded-full scale-150" />
-                  <div
-                    className="absolute inset-0 animate-radar"
-                    style={{ transformOrigin: "center" }}
-                  >
-                    <div
-                      className="w-16 h-px bg-gradient-to-r from-blue-500/60 to-transparent"
-                      style={{ position: "absolute", top: "50%", left: "50%", transformOrigin: "left center" }}
-                    />
-                  </div>
-                </div>
-
-                {/* Corner label */}
                 <div className="absolute top-2 right-2 px-2 py-1 bg-blue-500/20 rounded-md text-xs text-blue-300 font-mono">LIVE</div>
               </div>
 
@@ -188,9 +182,11 @@ export default function HeroSection() {
                   { label: "Demand", val: "+127", unit: "%", color: "text-cyan-400" },
                   { label: "Gap", val: "3.2", unit: "km", color: "text-green-400" },
                 ].map((m) => (
-                  <div key={m.label} className="metric-card text-center p-3">
+                  <div key={m.label} className="bg-white/[0.03] border border-white/[0.07] rounded-2xl p-3 text-center">
                     <p className="text-xs text-slate-500 mb-1">{m.label}</p>
-                    <p className={`text-lg font-bold ${m.color}`}>{m.val}<span className="text-xs text-slate-500">{m.unit}</span></p>
+                    <p className={`text-lg font-bold ${m.color}`}>
+                      {m.val}<span className="text-xs text-slate-500">{m.unit}</span>
+                    </p>
                   </div>
                 ))}
               </div>
@@ -203,15 +199,15 @@ export default function HeroSection() {
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={inView ? { opacity: 1, scale: 1 } : {}}
                 transition={{ duration: 0.5, delay: 0.5 + i * 0.15 }}
-                className="absolute glass-card rounded-xl px-3 py-2 flex items-center gap-2 shadow-xl"
+                className="absolute bg-white/[0.03] backdrop-blur-md rounded-xl px-3 py-2 flex items-center gap-2 shadow-xl"
                 style={{
                   top: card.top,
                   bottom: card.bottom,
                   right: card.right,
                   left: card.left,
-                  animation: `float ${4 + i}s ease-in-out infinite ${i * 0.8}s`,
                   border: `1px solid ${card.color}33`,
                   minWidth: "130px",
+                  animation: `float ${4 + i}s ease-in-out infinite ${i * 0.8}s`,
                 }}
               >
                 <div className="w-7 h-7 rounded-lg flex items-center justify-center" style={{ background: `${card.color}22` }}>
@@ -223,9 +219,6 @@ export default function HeroSection() {
                 </div>
               </motion.div>
             ))}
-
-            {/* Background glow for dashboard */}
-            <div className="absolute inset-0 -z-10 blur-3xl bg-blue-500/8 rounded-3xl" />
           </motion.div>
         </div>
       </div>

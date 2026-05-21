@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { Zap, Globe, Share2, MessageSquare, Mail } from "lucide-react";
+import Image from "next/image";
+import { Globe, Share2, MessageSquare, Mail } from "lucide-react";
 
 const footerLinks = {
   Platform: [
@@ -55,16 +56,14 @@ export default function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8 mb-12">
           {/* Brand */}
           <div className="col-span-2 md:col-span-4 lg:col-span-2">
-            <Link href="/" className="flex items-center gap-2.5 mb-4 group w-fit">
-              <div className="relative">
-                <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-400 flex items-center justify-center shadow-lg">
-                  <Zap className="w-5 h-5 text-white" strokeWidth={2.5} />
-                </div>
-                <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-400 blur-md opacity-30 group-hover:opacity-60 transition-opacity" />
-              </div>
-              <span className="text-xl font-bold text-white tracking-tight">
-                SPOT<span className="text-gradient-primary">LIX</span>
-              </span>
+            <Link href="/" className="flex items-center mb-6 group w-fit">
+              <Image 
+                src="/logo.png" 
+                alt="Spotlix" 
+                width={150} 
+                height={40} 
+                className="h-8 w-auto object-contain" 
+              />
             </Link>
             <p className="text-sm text-slate-500 leading-relaxed max-w-xs mb-6">
               Smarter Locations. Stronger Businesses. The modern platform for physical business intelligence and location strategy.
@@ -76,7 +75,7 @@ export default function Footer() {
                   key={s.label}
                   href={s.href}
                   aria-label={s.label}
-                  className="w-9 h-9 rounded-xl glass-card flex items-center justify-center text-slate-400 hover:text-white hover:border-blue-500/40 transition-all duration-200"
+                  className="w-9 h-9 rounded-xl bg-white/[0.03] border border-white/[0.08] flex items-center justify-center text-slate-400 hover:text-white hover:border-blue-500/40 transition-all duration-200"
                 >
                   <s.icon className="w-4 h-4" />
                 </a>
@@ -107,9 +106,7 @@ export default function Footer() {
 
         {/* Bottom bar */}
         <div className="border-t border-white/5 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-slate-600">
-            © 2026 Spotlix. All rights reserved.
-          </p>
+          <p className="text-xs text-slate-600">© 2026 Spotlix. All rights reserved.</p>
           <p className="text-xs text-slate-600">
             Physical Business Intelligence Platform •{" "}
             <a href="https://spotlix.io" className="hover:text-slate-400 transition-colors">spotlix.io</a>

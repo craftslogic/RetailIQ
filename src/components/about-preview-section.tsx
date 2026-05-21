@@ -31,12 +31,10 @@ export default function AboutPreviewSection() {
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section id="about" ref={ref} className="relative py-24 overflow-hidden" style={{ background: "#07111F" }}>
+    <section id="about" ref={ref} className="relative py-24 overflow-hidden bg-[#07111F]">
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/5 to-transparent" />
-
-      {/* Background decorative element */}
-      <div className="absolute right-0 top-1/4 w-96 h-96 bg-blue-600/6 rounded-full blur-3xl" />
-      <div className="absolute left-0 bottom-1/4 w-64 h-64 bg-cyan-600/5 rounded-full blur-3xl" />
+      <div className="absolute right-0 top-1/4 w-96 h-96 bg-blue-600/[0.06] rounded-full blur-3xl" />
+      <div className="absolute left-0 bottom-1/4 w-64 h-64 bg-cyan-600/[0.05] rounded-full blur-3xl" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
@@ -48,7 +46,9 @@ export default function AboutPreviewSection() {
               transition={{ duration: 0.5 }}
               className="inline-flex mb-6"
             >
-              <span className="section-label">About Spotlix</span>
+              <span className="inline-flex items-center gap-2 bg-blue-500/10 border border-blue-500/25 text-blue-400 px-3.5 py-1 rounded-full text-xs font-semibold uppercase tracking-widest">
+                About Spotlix
+              </span>
             </motion.div>
 
             <motion.h2
@@ -58,7 +58,9 @@ export default function AboutPreviewSection() {
               className="text-3xl sm:text-4xl font-bold text-white mb-6 leading-tight"
             >
               Built to Make Physical Businesses{" "}
-              <span className="text-gradient-primary">Launch Smarter</span>
+              <span className="bg-gradient-to-r from-blue-500 to-cyan-400 bg-clip-text text-transparent">
+                Launch Smarter
+              </span>
             </motion.h2>
 
             <motion.p
@@ -92,7 +94,7 @@ export default function AboutPreviewSection() {
               className="space-y-4 mb-8"
             >
               {principles.map((p) => (
-                <div key={p.title} className="flex items-start gap-4 p-3 rounded-xl hover:bg-white/3 transition-all">
+                <div key={p.title} className="flex items-start gap-4 p-3 rounded-xl hover:bg-white/[0.03] transition-all">
                   <div
                     className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5"
                     style={{ background: `${p.color}18`, border: `1px solid ${p.color}25` }}
@@ -112,7 +114,10 @@ export default function AboutPreviewSection() {
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.4 }}
             >
-              <Link href="/about" className="btn-primary gap-2">
+              <Link
+                href="/about"
+                className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-white font-semibold px-7 py-3 rounded-xl shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 hover:-translate-y-0.5 transition-all duration-300"
+              >
                 Learn More About Spotlix
                 <ArrowRight className="w-4 h-4" />
               </Link>
@@ -126,9 +131,18 @@ export default function AboutPreviewSection() {
             transition={{ duration: 0.7, delay: 0.2 }}
             className="relative"
           >
-            <div className="glass-card rounded-2xl p-8 relative overflow-hidden glow-border-accent">
+            <div
+              className="bg-white/[0.03] border border-white/[0.08] backdrop-blur-md rounded-2xl p-8 relative overflow-hidden"
+              style={{ boxShadow: "0 0 0 1px rgba(6,182,212,0.28), 0 0 30px rgba(6,182,212,0.10)" }}
+            >
               {/* Background pattern */}
-              <div className="absolute inset-0 dot-grid opacity-30" />
+              <div
+                className="absolute inset-0 opacity-30"
+                style={{
+                  backgroundImage: "radial-gradient(rgba(37,99,235,0.2) 1px, transparent 1px)",
+                  backgroundSize: "24px 24px",
+                }}
+              />
               <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-cyan-500/5" />
 
               <div className="relative z-10">
@@ -136,7 +150,7 @@ export default function AboutPreviewSection() {
                 <div className="mb-8">
                   <p className="text-xs font-bold uppercase tracking-widest text-cyan-400 mb-2">Our Mission</p>
                   <p className="text-white font-semibold text-base leading-relaxed">
-                    "Eliminate guesswork from physical business launch decisions through systematic market intelligence."
+                    &quot;Eliminate guesswork from physical business launch decisions through systematic market intelligence.&quot;
                   </p>
                 </div>
 
@@ -156,7 +170,10 @@ export default function AboutPreviewSection() {
                     { val: "Global", label: "Coverage" },
                     { val: "100%", label: "Data-Driven" },
                   ].map((s) => (
-                    <div key={s.label} className="metric-card p-3 text-center">
+                    <div
+                      key={s.label}
+                      className="bg-white/[0.03] border border-white/[0.07] rounded-2xl p-3 text-center hover:border-blue-500/30 transition-colors"
+                    >
                       <p className="text-lg font-bold text-white">{s.val}</p>
                       <p className="text-xs text-slate-500">{s.label}</p>
                     </div>
