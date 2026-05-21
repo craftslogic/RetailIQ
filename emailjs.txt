@@ -1,0 +1,44 @@
+To set up your EmailJS template perfectly so that it automatically maps to the new Spotlix contact form, you need to use the exact variable names we defined in the code.
+
+In your EmailJS Dashboard, go to Email Templates -> Create New Template (or edit your existing one), and use the following configuration:
+
+Template Settings
+To Email: (Your actual receiving email address, e.g., hello@spotlix.io)
+From Name: {{from_name}}
+From Email: {{from_email}}
+Reply To: {{from_email}}
+Subject: New Intelligence Request from {{from_name}}
+Template Content (Message Body)
+You can copy and paste this exact layout into the Content / Message box in EmailJS. It is formatted to look clean and professional when you receive it:
+
+text
+Hello {{to_name}},
+You have received a new business intelligence and strategy request via the Spotlix platform.
+================================
+CONTACT DETAILS
+================================
+Name: {{from_name}}
+Email: {{from_email}}
+================================
+BUSINESS PARAMETERS
+================================
+Business Type: {{business_type}}
+Preferred City/Area: {{preferred_area}}
+Budget: {{budget}}
+================================
+BUSINESS GOALS & TIMELINE
+================================
+{{business_goals}}
+================================
+This email was securely generated from the Spotlix.io Enterprise Contact System.
+Explanation of Variables Used:
+The src/components/contact-section.tsx file passes exactly these 7 variables securely to the EmailJS SDK:
+
+{{to_name}} (Hardcoded to "Spotlix Team")
+{{from_name}} (User's Full Name)
+{{from_email}} (User's Email Address)
+{{business_type}} (e.g., Café, Clothing Store)
+{{preferred_area}} (e.g., Gulshan, Karachi)
+{{budget}} (e.g., $50k - $100k)
+{{business_goals}} (User's detailed message)
+Once you save this template, make sure your .env.local file has the correct NEXT_PUBLIC_EMAILJS_TEMPLATE_ID that matches this template, and your form will work perfectly!
