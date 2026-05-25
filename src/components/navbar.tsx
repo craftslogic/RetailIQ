@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ChevronDown } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname, useRouter } from "next/navigation";
 
 const navLinks = [
   { label: "Home", href: "/" },
@@ -28,6 +29,8 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const pathname = usePathname();
+  const router = useRouter();
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 20);
@@ -35,10 +38,14 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handler);
   }, []);
 
-  const handleNavClick = (href: string) => {
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     setMobileOpen(false);
     setActiveDropdown(null);
-    if (href.startsWith("/#")) {
+    if (href.startsWith("/#") && pathname !== "/") {
+      e.preventDefault();
+      router.push(href);
+    } else if (href.startsWith("/#")) {
+      e.preventDefault();
       const id = href.replace("/#", "");
       const el = document.getElementById(id);
       if (el) el.scrollIntoView({ behavior: "smooth" });
@@ -91,7 +98,7 @@ export default function Navbar() {
                   ) : (
                     <Link
                       href={link.href}
-                      onClick={() => handleNavClick(link.href)}
+                      onClick={(e) => handleNavClick(e, link.href)}
                       className="flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all duration-200"
                     >
                       {link.label}
@@ -112,7 +119,7 @@ export default function Navbar() {
                           <Link
                             key={item.label}
                             href={item.href}
-                            onClick={() => handleNavClick(item.href)}
+                            onClick={(e) => handleNavClick(e, item.href)}
                             className="block px-3 py-2.5 rounded-lg text-sm text-slate-300 hover:text-white hover:bg-white/5 transition-all duration-200"
                           >
                             {item.label}
@@ -129,14 +136,14 @@ export default function Navbar() {
             <div className="hidden lg:flex items-center gap-3">
               <Link
                 href="/#contact"
-                onClick={() => handleNavClick("/#contact")}
+                onClick={(e) => handleNavClick(e, "/#contact")}
                 className="px-4 py-2 text-sm font-medium text-slate-300 hover:text-white transition-colors duration-200"
               >
                 Book a Call
               </Link>
               <Link
                 href="/#contact"
-                onClick={() => handleNavClick("/#contact")}
+                onClick={(e) => handleNavClick(e, "/#contact")}
                 className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-white font-semibold text-sm px-5 py-2.5 rounded-xl shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 hover:-translate-y-0.5 transition-all duration-300"
               >
                 Get Started
@@ -169,7 +176,7 @@ export default function Navbar() {
                 <div key={link.label}>
                   <Link
                     href={link.href}
-                    onClick={() => handleNavClick(link.href)}
+                    onClick={(e) => handleNavClick(e, link.href)}
                     className="block px-4 py-3 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all"
                   >
                     {link.label}
@@ -180,7 +187,7 @@ export default function Navbar() {
                         <Link
                           key={item.label}
                           href={item.href}
-                          onClick={() => handleNavClick(item.href)}
+                          onClick={(e) => handleNavClick(e, item.href)}
                           className="block px-4 py-2 rounded-lg text-xs text-slate-400 hover:text-white hover:bg-white/5 transition-all"
                         >
                           {item.label}
@@ -193,14 +200,14 @@ export default function Navbar() {
               <div className="pt-3 pb-2 flex flex-col gap-2 border-t border-white/5">
                 <Link
                   href="/#contact"
-                  onClick={() => handleNavClick("/#contact")}
+                  onClick={(e) => handleNavClick(e, "/#contact")}
                   className="inline-flex justify-center items-center gap-2 bg-white/5 hover:bg-white/10 border border-white/12 text-white font-medium text-sm px-7 py-3 rounded-xl transition-all duration-300"
                 >
                   Book a Call
                 </Link>
                 <Link
                   href="/#contact"
-                  onClick={() => handleNavClick("/#contact")}
+                  onClick={(e) => handleNavClick(e, "/#contact")}
                   className="inline-flex justify-center items-center gap-2 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold text-sm px-7 py-3 rounded-xl shadow-lg shadow-blue-500/30 transition-all duration-300"
                 >
                   Get Started
