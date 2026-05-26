@@ -23,10 +23,15 @@ export const socialLinks = {
     label: "Facebook",
     url: "https://facebook.com",
     enabled: false,
+  },  youtube: {
+    label: "YouTube",
+    url: "https://youtube.com/@spotlixio?si=5pqEbbut11VD9NoO",
+    enabled: true,
   },
-  instagram: {
+
+    instagram: {
     label: "Instagram",
-    url: "https://instagram.com",
-    enabled: false,
+    url: "https://www.instagram.com/spotlix.io?igsh=MXczZHNpcDlkZHJ2cg%3D%3D&utm_source=qr",
+    enabled: true,
   },
 };
