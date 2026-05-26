@@ -48,7 +48,10 @@ export default function Navbar() {
       e.preventDefault();
       const id = href.replace("/#", "");
       const el = document.getElementById(id);
-      if (el) el.scrollIntoView({ behavior: "smooth" });
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth" });
+        history.pushState(null, "", href);
+      }
     }
   };
 
