@@ -87,7 +87,7 @@ export default function AboutPageClient() {
               Spotlix was built to help entrepreneurs and physical businesses make smarter launch and expansion decisions through modern market intelligence, strategic analysis, and data-driven frameworks.
             </motion.p>
             <motion.div initial={{ opacity: 0, y: 20 }} animate={heroInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5, delay: 0.3 }} className="flex flex-wrap justify-center gap-4">
-              <Link href="/pricing" className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-white font-semibold px-7 py-3 rounded-xl shadow-lg shadow-blue-500/30 hover:-translate-y-0.5 transition-all duration-300">
+              <Link href="/#pricing" className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-white font-semibold px-7 py-3 rounded-xl shadow-lg shadow-blue-500/30 hover:-translate-y-0.5 transition-all duration-300">
                 Explore Plans <ArrowRight className="w-4 h-4" />
               </Link>
               <a href="#contact" onClick={(e) => { e.preventDefault(); document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" }); }} className="inline-flex items-center gap-2 bg-white/5 hover:bg-white/10 border border-white/12 hover:border-blue-500/45 text-white font-medium px-7 py-3 rounded-xl hover:-translate-y-0.5 transition-all duration-300">
@@ -244,7 +244,7 @@ export default function AboutPageClient() {
                   Get the intelligence you need to make confident location and expansion decisions.
                 </p>
                 <div className="flex flex-wrap justify-center gap-4">
-                  <Link href="/pricing" className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-white font-semibold px-7 py-3 rounded-xl shadow-lg shadow-blue-500/30 hover:-translate-y-0.5 transition-all duration-300">
+                  <Link href="/#pricing" className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-white font-semibold px-7 py-3 rounded-xl shadow-lg shadow-blue-500/30 hover:-translate-y-0.5 transition-all duration-300">
                     View Intelligence Plans <ArrowRight className="w-4 h-4" />
                   </Link>
                   <a href="/#contact" onClick={(e) => { e.preventDefault(); document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" }); }} className="inline-flex items-center gap-2 bg-white/5 hover:bg-white/10 border border-white/12 hover:border-blue-500/45 text-white font-medium px-7 py-3 rounded-xl hover:-translate-y-0.5 transition-all duration-300">

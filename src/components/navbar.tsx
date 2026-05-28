@@ -21,7 +21,7 @@ const navLinks = [
       { label: "Expansion Strategy", href: "/#features" },
     ],
   },
-  { label: "Pricing", href: "/pricing" },
+  { label: "Pricing", href: "/#pricing" },
   { label: "Contact", href: "/#contact" },
 ];
 
