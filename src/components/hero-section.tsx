@@ -109,6 +109,36 @@ export default function HeroSection() {
               </button>
             </motion.div>
 
+            <motion.div 
+              initial={{ opacity: 0, y: 30 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: 0.35 }}
+              className="flex items-center gap-4 mb-8"
+            >
+              <div className="flex -space-x-3">
+                {[1, 2, 3].map((i) => (
+                  <img
+                    key={i}
+                    src={`/reviews/${i}.jpeg`}
+                    alt={`User ${i}`}
+                    className="w-10 h-10 rounded-full border-2 border-[#05101D] object-cover shadow-sm"
+                  />
+                ))}
+              </div>
+              <div className="flex flex-col items-start">
+                <div className="flex text-cyan-400 mb-0.5">
+                  {[...Array(5)].map((_, i) => (
+                    <svg key={i} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
+                      <path fillRule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z" clipRule="evenodd" />
+                    </svg>
+                  ))}
+                </div>
+                <p className="text-sm font-medium text-slate-400">
+                  Trusted by 120+ growing businesses
+                </p>
+              </div>
+            </motion.div>
+
             {/* Trust indicators */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}

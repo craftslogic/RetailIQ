@@ -6,65 +6,35 @@ import { Star, Quote, ChevronLeft, ChevronRight } from "lucide-react";
 
 const testimonials = [
   {
-    name: "Sarah Chen",
+    name: "Alex Mercer",
     role: "Founder, Matcha House",
     industry: "Café Chain",
-    avatar: "SC",
+    avatar: "/reviews/1.jpeg",
     color: "#F59E0B",
     rating: 5,
     quote:
       "Spotlix completely changed how we approach expansion. Their location analysis identified a neighborhood we hadn't even considered — it became our highest-revenue café within 3 months of opening.",
   },
   {
-    name: "Marcus Williams",
+    name: "Jessica Tran",
     role: "CEO, UrbanWear Co.",
     industry: "Clothing Retail",
-    avatar: "MW",
+    avatar: "/reviews/2.jpeg",
     color: "#2563EB",
     rating: 5,
     quote:
       "The competitor research Spotlix delivered was incredibly detailed. We understood the market gaps before launching and positioned our brand to fill them. Our first store broke even in 60 days.",
   },
   {
-    name: "Priya Sharma",
+    name: "David Patel",
     role: "Director, FreshBite Restaurants",
     industry: "Restaurant Group",
-    avatar: "PS",
+    avatar: "/reviews/3.jpeg",
     color: "#10B981",
     rating: 5,
     quote:
       "We were about to sign a 5-year lease in the wrong location. Spotlix's feasibility report showed us the demand data that made us reconsider. Saved us from a potentially costly mistake.",
-  },
-  {
-    name: "James Park",
-    role: "Managing Partner, StepUp Footwear",
-    industry: "Shoe Brand",
-    avatar: "JP",
-    color: "#8B5CF6",
-    rating: 5,
-    quote:
-      "Their expansion strategy gave us a clear 18-month roadmap for entering 3 new markets. The market intelligence they provide is unlike anything we'd seen from traditional consultants.",
-  },
-  {
-    name: "Layla Al-Hassan",
-    role: "Founder, Glow Salon Studios",
-    industry: "Salon & Spa",
-    avatar: "LA",
-    color: "#EC4899",
-    rating: 5,
-    quote:
-      "From our first consultation to launch day, Spotlix supported every decision with real data. Their demand intelligence helped us understand exactly who our customers were and where they lived.",
-  },
-  {
-    name: "David Chen",
-    role: "Investment Director, Retail Ventures",
-    industry: "Commercial Investment",
-    avatar: "DC",
-    color: "#06B6D4",
-    rating: 5,
-    quote:
-      "We use Spotlix before every physical retail investment decision. Their area analysis and market reports have become non-negotiable parts of our due diligence process.",
-  },
+  }
 ];
 
 function StarRating({ count }: { count: number }) {
@@ -132,12 +102,12 @@ export default function TestimonialsSection() {
               <StarRating count={t.rating} />
               <p className="text-slate-300 text-sm leading-relaxed flex-1">&ldquo;{t.quote}&rdquo;</p>
               <div className="flex items-center gap-3 pt-4 border-t border-white/5">
-                <div
-                  className="w-9 h-9 rounded-xl flex items-center justify-center text-xs font-bold text-white flex-shrink-0"
-                  style={{ background: `${t.color}30`, border: `1px solid ${t.color}40` }}
-                >
-                  {t.avatar}
-                </div>
+                <img
+                  src={t.avatar}
+                  alt={t.name}
+                  className="w-10 h-10 rounded-xl object-cover flex-shrink-0"
+                  style={{ border: `1px solid ${t.color}40` }}
+                />
                 <div>
                   <p className="text-sm font-semibold text-white">{t.name}</p>
                   <p className="text-xs text-slate-500">{t.role}</p>
@@ -168,12 +138,11 @@ export default function TestimonialsSection() {
               <StarRating count={testimonials[activeIdx].rating} />
               <p className="text-slate-300 text-sm leading-relaxed">&ldquo;{testimonials[activeIdx].quote}&rdquo;</p>
               <div className="flex items-center gap-3 pt-4 border-t border-white/5">
-                <div
-                  className="w-9 h-9 rounded-xl flex items-center justify-center text-xs font-bold text-white"
-                  style={{ background: `${testimonials[activeIdx].color}30` }}
-                >
-                  {testimonials[activeIdx].avatar}
-                </div>
+                <img
+                  src={testimonials[activeIdx].avatar}
+                  alt={testimonials[activeIdx].name}
+                  className="w-10 h-10 rounded-xl object-cover"
+                />
                 <div>
                   <p className="text-sm font-semibold text-white">{testimonials[activeIdx].name}</p>
                   <p className="text-xs text-slate-500">{testimonials[activeIdx].role}</p>
