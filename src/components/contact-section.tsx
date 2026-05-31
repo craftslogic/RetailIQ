@@ -5,9 +5,10 @@ import { motion, useInView } from "framer-motion";
 import { Send, CheckCircle, AlertCircle, Loader2, Mail, Phone, MapPin } from "lucide-react";
 import emailjs from "@emailjs/browser";
 
-const SERVICE_ID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || "YOUR_SERVICE_ID";
-const TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || "YOUR_TEMPLATE_ID";
-const PUBLIC_KEY = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || "YOUR_PUBLIC_KEY";
+const SERVICE_ID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!;
+const TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!;
+const PUBLIC_KEY = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!;
+const TO_EMAIL = process.env.NEXT_PUBLIC_EMAILJS_TO_EMAIL!;
 
 type FormState = "idle" | "loading" | "success" | "error";
 
@@ -73,13 +74,11 @@ export default function ContactSection() {
         SERVICE_ID,
         TEMPLATE_ID,
         {
-          to_name: "Spotlix Team",
+          to_email: TO_EMAIL,
           from_name: formData.from_name,
-          from_email: formData.from_email,
-          business_type: formData.business_type,
-          preferred_area: formData.preferred_area,
-          budget: formData.budget || "Not specified",
-          business_goals: formData.business_goals,
+          reply_to: formData.from_email,
+          company: formData.business_type,
+          message: `Area: ${formData.preferred_area}\nBudget: ${formData.budget || "Not specified"}\n\n${formData.business_goals}`,
         },
         PUBLIC_KEY
       );
