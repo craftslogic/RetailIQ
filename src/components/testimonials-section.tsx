@@ -6,7 +6,7 @@ import { Star, Quote, ChevronLeft, ChevronRight } from "lucide-react";
 
 const testimonials = [
   {
-    name: "Alex Mercer",
+    name: "Alexa Mercerr",
     role: "Founder, Matcha House",
     industry: "Café Chain",
     avatar: "/reviews/1.jpeg",
@@ -16,7 +16,7 @@ const testimonials = [
       "Spotlix completely changed how we approach expansion. Their location analysis identified a neighborhood we hadn't even considered — it became our highest-revenue café within 3 months of opening.",
   },
   {
-    name: "Jessica Tran",
+    name: "Jason Tran",
     role: "CEO, UrbanWear Co.",
     industry: "Clothing Retail",
     avatar: "/reviews/2.jpeg",
