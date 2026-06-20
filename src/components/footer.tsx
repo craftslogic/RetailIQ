@@ -1,3 +1,4 @@
+import { Zap, MapPin, Phone, Mail } from "lucide-react";
 "use client";
 
 import Link from "next/link";
@@ -104,24 +105,38 @@ export default function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8 mb-12">
           {/* Brand */}
           <div className="col-span-2 md:col-span-4 lg:col-span-2">
-            <Link href="/" className="flex items-center mb-6 group w-fit">
-              <Image 
-                src="/logo.png" 
-                alt="Spotlix" 
-                width={150} 
-                height={40} 
-                className="h-8 w-auto object-contain" 
-              />
+            <Link href="/" className="flex items-center gap-3 mb-6 w-fit">
+              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#515BFF] to-[#8752FF] flex items-center justify-center shadow-[0_8px_24px_rgba(81,91,255,0.2)]">
+                <Zap className="w-6 h-6 text-white" strokeWidth={2.5} />
+              </div>
+              <span className="text-2xl font-bold tracking-tight text-white">Spotlix IO <span className="text-[#A47CF6] font-semibold">LLC</span></span>
             </Link>
-            <p className="text-sm text-slate-500 leading-relaxed max-w-xs mb-4">
-              Smarter Locations. Stronger Businesses. The modern platform for physical business intelligence and location strategy.
+            <p className="text-[#8A91A5] max-w-sm mb-8 text-sm md:text-base leading-relaxed">
+              Intelligence-driven business audits and scalable growth systems for ambitious startups and modern businesses.
             </p>
-            <a
-              href="mailto:hello@spotlix.io"
-              className="text-sm text-slate-400 hover:text-white transition-colors block mb-6"
-            >
-              hello@spotlix.io
-            </a>
+            <div className="flex flex-col gap-4 mb-6">
+              <div className="flex items-start gap-4">
+                <div className="text-[#A47CF6] mt-0.5">
+                  <MapPin className="w-5 h-5" strokeWidth={1.8} />
+                </div>
+                <div className="flex flex-col text-[#B5BECF] text-base">
+                  <span>746 W Wood Star Dr</span>
+                  <span>Wasilla, AK 99654</span>
+                </div>
+              </div>
+              <div className="flex items-start gap-4">
+                <div className="text-[#A47CF6] mt-0.5">
+                  <Phone className="w-5 h-5" strokeWidth={1.8} />
+                </div>
+                <div className="text-[#B5BECF] text-base">+1 (769) 969-1997</div>
+              </div>
+              <div className="flex items-start gap-4">
+                <div className="text-[#A47CF6] mt-0.5">
+                  <Mail className="w-5 h-5" strokeWidth={1.8} />
+                </div>
+                <div className="text-[#B5BECF] text-base">hello@spotlix.io</div>
+              </div>
+            </div>
             {/* Social links */}
             {activeSocials.length > 0 && (
               <div className="flex items-center gap-3">
