@@ -1,6 +1,6 @@
-import { Zap, MapPin, Building2, Mail } from "lucide-react";
 "use client";
 
+import { Zap, MapPin, Building2, Mail } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { socialLinks } from "@/lib/social";
